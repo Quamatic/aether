@@ -1,0 +1,14 @@
+/node_modules
+/out
+/include
+*.tsbuildinfo
+
+# Wally
+/DevPackages
+
+# Rojo
+/sourcemap.json
+
+# Repo
+/src/**/node_modules
+/src/**/wally.lock
