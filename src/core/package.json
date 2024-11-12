@@ -1,0 +1,11 @@
+{
+  "name": "@rbxts/aether",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/init.luau",
+  "types": "src/index.d.ts",
+  "license": "MIT",
+  "scripts": {
+    "publish": "wally publish"
+  }
+}

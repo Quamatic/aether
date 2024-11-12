@@ -4,7 +4,27 @@
 		"$className": "DataModel",
 
 		"ReplicatedStorage": {
-			"$className": "ReplicatedStorage"
+			"$className": "ReplicatedStorage",
+
+			"DevPackages": {
+				"$path": "DevPackages",
+
+				"Aether": {
+					"$path": "src/core"
+				},
+
+				"AetherReact": {
+					"$path": "src/react"
+				},
+	
+				"AetherVide": {
+					"$path": "src/vide"
+				}
+			},
+
+			"Stories": {
+				"$path": "stories"
+			}
 		}
 	}
 }

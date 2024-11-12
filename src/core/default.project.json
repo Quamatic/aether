@@ -1,0 +1,6 @@
+{
+    "name": "aether",
+    "tree": {
+        "$path": "src"
+    }
+}
