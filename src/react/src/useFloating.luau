@@ -2,6 +2,7 @@ local Aether = require(script.Parent.Parent.Aether)
 local React = require(script.Parent.Parent.React)
 
 local useLatestRef = require(script.Parent.utils.useLatestRef)
+local merge = require(script.Parent.utils.merge)
 
 export type UseFloatingData = Aether.ProcessConfigResult & {
 	isPositioned: boolean,
@@ -22,16 +23,6 @@ export type UseFloatingReturn = UseFloatingData & {
 		setTarget: (node: GuiObject) -> (),
 	},
 }
-
-local function merge<A, B>(a: A, b: B): A & B
-	local cloned = table.clone(a :: any)
-
-	for key, value in b :: any do
-		cloned[key] = value
-	end
-
-	return (cloned :: any) :: A & B
-end
 
 local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 	local placement = config.placement or "bottom"
