@@ -1,6 +1,6 @@
 import { ElementContext, MiddlewareState, Padding, Rect, SideObject } from "./types";
 
-export type Boundary = "clipping-ancestors" | GuiObject | GuiObject[] | Rect;
+export type Boundary = "clipping-ancestors" | GuiObject | Rect;
 export type RootBoundary = "layer-collector" | "viewport" | Rect;
 
 export interface DetectOverflowConfig {

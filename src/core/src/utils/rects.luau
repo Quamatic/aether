@@ -1,6 +1,6 @@
 local types = require(script.Parent.Parent.types)
 
-local function createRectFromGuiObject(element: GuiObject)
+local function createRectFromGuiObject(element: GuiObject | LayerCollector)
 	local position = element.AbsolutePosition
 	local size = element.AbsoluteSize
 

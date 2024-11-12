@@ -9,5 +9,6 @@ return {
 		script.convertOffsetParentRelativeRectToViewportRelativeRect
 	),
 	getScale = require(script.getScale),
+	isElement = require(script.isElement),
 	unwrapElement = require(script.unwrapElement),
 }

@@ -1,6 +1,7 @@
 local types = require(script.Parent.Parent.types)
 
 local getLayerElement = require(script.Parent.getLayerElement)
+local isElement = require(script.Parent.isElement)
 
 local rects = require(script.Parent.Parent.utils.rects)
 local createRectFromGuiObject = rects.createRectFromGuiObject
@@ -8,28 +9,24 @@ local convertRectToBoundingRect = rects.convertRectToBoundingRect
 
 type ClippingAncestor = GuiObject | types.RootBoundary
 
-local function isElement(x: unknown)
-	if typeof(x) ~= "Instance" then
-		return false
-	end
-
-	return x:IsA("GuiObject") or x:IsA("LayerCollector")
-end
-
-local function isArray(x: unknown)
-	return typeof(x) == "table" and #(x :: {}) > 0
-end
+local EMPTY_RECT: types.Rect = {
+	x = 0,
+	y = 0,
+	width = 0,
+	height = 0,
+}
 
 local function getBoundingRectFromClippingAncestor(element: GuiObject, clippingAncestor: GuiObject | types.RootBoundary)
-	local rect: types.Rect
+	local rect = EMPTY_RECT
 
 	if clippingAncestor == "layer-collector" then
+		-- Ancestor is targeting the LayerCollector
 		local layer = getLayerElement(element)
 
-		rect = if layer
-			-- Forcing it to be recognized as GuiObject because LayerCollector has the required properties.
-			then createRectFromGuiObject((layer :: any) :: GuiObject)
-			else { x = 0, y = 0, width = 0, height = 0 }
+		-- TODO: maybe try to fix this case? React won't have this issue but Vide does, which I believe is due to deferring.
+		if layer ~= nil then
+			rect = createRectFromGuiObject(layer)
+		end
 	elseif isElement(clippingAncestor) then
 		-- Ancestor is a GuiObject
 		rect = createRectFromGuiObject(clippingAncestor :: GuiObject)
@@ -41,16 +38,12 @@ local function getBoundingRectFromClippingAncestor(element: GuiObject, clippingA
 	return convertRectToBoundingRect(rect)
 end
 
-local function isClippingElement(element: Instance)
-	return element:IsA("GuiObject") and element.ClipsDescendants
-end
-
 local function getOverflowAncestors(element: GuiObject)
 	local ancestors = {}
 	local current = element.Parent
 
 	while current ~= nil do
-		if isClippingElement(current) then
+		if element:IsA("GuiObject") and element.ClipsDescendants then
 			table.insert(ancestors, current :: GuiObject)
 		end
 
@@ -70,10 +63,9 @@ local function getClippingRect(
 	local clippingAncestors: { ClippingAncestor }
 	if boundary == "clipping-ancestors" then
 		clippingAncestors = getOverflowAncestors(element)
-	elseif isArray(boundary) then
-		clippingAncestors = table.clone(boundary)
 	else
-		clippingAncestors = { boundary :: any }
+		-- GuiObject or Rect
+		clippingAncestors = { boundary }
 	end
 
 	-- Insert root boundary
