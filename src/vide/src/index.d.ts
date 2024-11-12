@@ -1,3 +1,3 @@
-import useFloating from "./useFloating";
+import useFloating, { UseFloatingConfig, UseFloatingReturn } from "./useFloating";
 
-export { useFloating };
+export { useFloating, UseFloatingConfig, UseFloatingReturn };

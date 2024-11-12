@@ -4,7 +4,7 @@ local React = require(script.Parent.Parent.React)
 local useLatestRef = require(script.Parent.utils.useLatestRef)
 local merge = require(script.Parent.utils.merge)
 
-export type UseFloatingData = Aether.ProcessConfigResult & {
+type UseFloatingData = Aether.ProcessConfigResult & {
 	isPositioned: boolean,
 }
 

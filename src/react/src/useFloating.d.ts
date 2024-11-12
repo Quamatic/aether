@@ -1,10 +1,6 @@
 import { ProcessConfig, ProcessConfigResult, ReferenceElement } from "@rbxts/aether";
 import { MutableRefObject } from "@rbxts/react";
 
-export interface UseFloatingData extends ProcessConfigResult {
-	isPositioned: boolean;
-}
-
 export interface UseFloatingConfig<R extends ReferenceElement, T extends GuiObject = GuiObject> extends ProcessConfig {
 	whileElementsMounted?: (reference: R, target: T, update: () => void) => () => void;
 	elements?: {
@@ -14,7 +10,8 @@ export interface UseFloatingConfig<R extends ReferenceElement, T extends GuiObje
 }
 
 export interface UseFloatingReturn<R extends ReferenceElement, T extends GuiObject = GuiObject>
-	extends UseFloatingData {
+	extends ProcessConfigResult {
+	isPositioned: boolean;
 	/**
 	 * Updates the position of the target element, re-rendering the component
 	 * if required.
