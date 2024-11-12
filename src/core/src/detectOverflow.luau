@@ -13,6 +13,7 @@ local getLayerElement = platform.getLayerElement
 local convertOffsetParentRelativeRectToViewportRelativeRect =
 	platform.convertOffsetParentRelativeRectToViewportRelativeRect
 local getScale = platform.getScale
+local isElement = platform.isElement
 
 export type DetectOverflowContext = "reference" | "target"
 
@@ -28,10 +29,6 @@ export type DetectOverflowConfig = {
 	altBoundary: boolean?,
 	padding: types.Padding?,
 }
-
-local function isGuiElement(element: unknown)
-	return typeof(element) == "Instance" and (element :: Instance):IsA("GuiObject")
-end
 
 --[[
     Resolves with an object of overflow side offsets that determine how much the
@@ -57,7 +54,7 @@ local function detectOverflow(state: types.MiddlewareState, config: DetectOverfl
 	local element = elements[if altBoundary then altContext else elementContext]
 
 	-- Clipping boundary
-	local rawElement: GuiObject = if isGuiElement(element)
+	local rawElement: GuiObject = if isElement(element)
 		then element
 		-- Check if it's a reference element with a given context element.
 		else if element.contextElement

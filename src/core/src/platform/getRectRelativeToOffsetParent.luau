@@ -15,7 +15,7 @@ local function getRectRelativeToOffsetParent(
 			scroll = offsetParent.CanvasPosition
 		end
 
-		local offsetRect = getElementBoundingRect(offsetParent :: GuiObject, true, offsetParent)
+		local offsetRect = getElementBoundingRect(offsetParent, true, offsetParent)
 		offsets.x = offsetRect.x
 		offsets.y = offsetRect.y
 	end
