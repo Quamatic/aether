@@ -9,7 +9,7 @@ export type UseFloatingData = Aether.ProcessConfigResult & {
 }
 
 export type UseFloatingConfig = Aether.ProcessConfig & {
-	whileElementsMounted: (reference: Aether.ReferenceElement, target: GuiObject, update: () -> ()) -> () -> (),
+	whileElementsMounted: (reference: Aether.ReferenceElement, target: GuiObject, update: () -> ()) -> () -> ()?,
 	elements: Aether.ElementRefs?,
 }
 

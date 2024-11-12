@@ -14,8 +14,6 @@ export type UseFloatingConfig = {
 	placement: Derivable<aether.Placement>?,
 	middleware: Derivable<{ aether.Middleware<any> }>?,
 	whileElementsMounted: (reference: aether.ReferenceElement, target: GuiObject, update: () -> ()) -> () -> ()?,
-	elements: aether.ElementRefs?,
-	enabled: boolean | (() -> boolean)?,
 }
 
 export type UseFloatingReturn = {
