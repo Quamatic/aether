@@ -34,17 +34,21 @@ local OPPOSITE_ALIGNMENT_MAP = {
 	["end"] = "start",
 }
 
-local function substitution(side: string, rest: string)
-	return OPPOSITE_SIDE_MAP[side] .. if rest ~= "" then `-{rest}` else ""
+local function oppsiteSideSubstitution(side: string, rest: string)
+	return OPPOSITE_SIDE_MAP[side] .. if rest ~= "" then `-{rest}` else rest
+end
+
+local function oppositeAlignmentSubstitution(side: string, alignment: string)
+	return side .. if alignment ~= "" then `-{OPPOSITE_ALIGNMENT_MAP[alignment]}` else alignment
 end
 
 local function getOppositePlacement(placement: types.Placement)
-	local result = string.gsub(placement, "^([^-]*)-?(.*)$", substitution :: never)
+	local result = string.gsub(placement, "^([^-]*)-?(.*)$", oppsiteSideSubstitution :: never)
 	return result
 end
 
 local function getOppositeAlignmentPlacement(placement: types.Placement)
-	local result = string.gsub(placement, "-?(.*)", OPPOSITE_ALIGNMENT_MAP)
+	local result = string.gsub(placement, "(.-)-(.*)", oppositeAlignmentSubstitution :: never)
 	return result
 end
 
