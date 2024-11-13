@@ -80,7 +80,7 @@ local function process(reference: types.ReferenceElement, target: GuiObject, con
 		y = result.y or y
 
 		-- Store middleware data
-		if result.data then
+		if result.data ~= nil then
 			local stored = data[name]
 			if stored == nil then
 				data[name] = result.data
