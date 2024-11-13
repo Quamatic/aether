@@ -3,6 +3,7 @@ import { Middleware, MiddlewareData, Placement, Position, ReferenceElement } fro
 export interface ProcessConfig {
 	placement?: Placement;
 	middleware?: Middleware[];
+	rtl?: boolean;
 }
 
 export interface ProcessConfigResult extends Position {

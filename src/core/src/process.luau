@@ -9,11 +9,11 @@ export type ProcessConfig = {
 	--[[
         Where to place the floating element relative to the reference element.
     ]]
-	placement: types.Placement,
+	placement: types.Placement?,
 	--[[
         The middleware used to modify the positioning or provide data for rendering.
     ]]
-	middleware: { types.Middleware<any> },
+	middleware: { types.Middleware<any> }?,
 	--[[
 		If the position should be processed as right-to-left.
 	]]
@@ -37,15 +37,15 @@ export type ProcessConfigResult = types.Position & {
 ]]
 local function process(reference: types.ReferenceElement, target: GuiObject, config: ProcessConfig): ProcessConfigResult
 	-- Stateful data
-	local initialPlacement = config.placement
-	local placement = config.placement
+	local initialPlacement = config.placement or "bottom"
+	local placement = initialPlacement
 	local rtl = not not config.rtl
 	local rects = getElementRects(reference, target)
 	local x, y = computePosition(rects, placement, rtl)
 	local data = {} :: types.MiddlewareData
 
 	-- Middleware
-	local middlewares = config.middleware
+	local middlewares = config.middleware or {}
 	local length = #middlewares
 	local index = 0
 
