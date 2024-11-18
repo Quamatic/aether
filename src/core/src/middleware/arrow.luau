@@ -4,9 +4,7 @@ local placement = require(script.Parent.Parent.utils.placement)
 local getPlacementPosition = placement.getPlacementPosition
 local getPlacementAxes = placement.getPlacementAxes
 
-local _padding = require(script.Parent.Parent.utils.padding)
-local getPaddingObject = _padding.getPaddingObject
-
+local getPaddingObject = require(script.Parent.Parent.utils.getPaddingObject)
 local read = require(script.Parent.Parent.utils.read)
 
 export type Input = {
@@ -35,7 +33,7 @@ local function arrow(input: types.Derivable<Input>): types.Middleware<Output>
 	return {
 		name = "arrow",
 		run = function(state)
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 
 			local element = config.element
 			if element == nil then

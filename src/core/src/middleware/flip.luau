@@ -118,7 +118,7 @@ local function flip(input: types.Derivable<Input>): types.Middleware<Output>
 				return nil
 			end
 
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 			local checkMainAxis = if config.mainAxis ~= nil then config.mainAxis else true
 			local checkCrossAxis = if config.crossAxis ~= nil then config.crossAxis else true
 			local specifiedFallbackPlacements = config.fallbackPlacements

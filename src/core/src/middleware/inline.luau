@@ -2,7 +2,7 @@ local types = require(script.Parent.Parent.types)
 
 local rects = require(script.Parent.Parent.utils.rects)
 local convertRectToBoundingRect = rects.convertRectToBoundingRect
-local areRectsEqual = rects.areRectsEqual
+local isSameRect = rects.isSameRect
 
 local placement = require(script.Parent.Parent.utils.placement)
 local getPlacementPosition = placement.getPlacementPosition
@@ -10,9 +10,7 @@ local getPlacementPosition = placement.getPlacementPosition
 local platform = require(script.Parent.Parent.platform)
 local getElementRects = platform.getElementRects
 
-local padding_ = require(script.Parent.Parent.utils.padding)
-local getPaddingObject = padding_.getPaddingObject
-
+local getPaddingObject = require(script.Parent.Parent.utils.getPaddingObject)
 local read = require(script.Parent.Parent.utils.read)
 
 export type Input = {
@@ -95,7 +93,7 @@ local function getRectsByLine(rects: { types.BoundingRect })
 	return mapped
 end
 
-local function isPointFullyInside(x: number, y: number, rect: types.BoundingRect, padding: types.Sides)
+local function isPointFullyInside(x: number, y: number, rect: types.BoundingRect, padding: types.SideObject)
 	return x > rect.left - padding.left
 		and x < rect.right + padding.right
 		and y > rect.top - padding.top
@@ -110,7 +108,7 @@ local function inline(input: types.Derivable<Input>): types.Middleware<Output>
 	return {
 		name = "inline",
 		run = function(state)
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 
 			local x = config.x
 			local y = config.y
@@ -196,7 +194,7 @@ local function inline(input: types.Derivable<Input>): types.Middleware<Output>
 				getBoundingRect = getBoundingRect,
 			}, state.elements.target)
 
-			if not areRectsEqual(state.rects.reference, resetRects.reference) then
+			if not isSameRect(state.rects.reference, resetRects.reference) then
 				return {
 					reset = {
 						rects = resetRects,

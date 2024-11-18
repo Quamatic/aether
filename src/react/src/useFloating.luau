@@ -97,7 +97,7 @@ local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 
 	-- Updating
 	React.useLayoutEffect(
-		function()
+		function(): ()
 			if referenceElement then
 				referenceRef.current = referenceElement
 			end

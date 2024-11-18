@@ -31,7 +31,7 @@ local function size(input: types.Derivable<Input>): types.Middleware<Output>
 	return {
 		name = "size",
 		run = function(state)
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 			local detectOverflowConfig = config.detectOverflowConfig or {}
 			local apply = config.apply
 

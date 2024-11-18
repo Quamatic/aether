@@ -25,12 +25,12 @@ local function convertRectToBoundingRect(rect: types.Rect): types.BoundingRect
 	}
 end
 
-local function areRectsEqual(left: types.Rect, right: types.Rect)
+local function isSameRect(left: types.Rect, right: types.Rect)
 	return left.x == right.x and left.y == right.y and left.width == right.width and left.height == right.height
 end
 
 return {
 	createRectFromGuiObject = createRectFromGuiObject,
 	convertRectToBoundingRect = convertRectToBoundingRect,
-	areRectsEqual = areRectsEqual,
+	isSameRect = isSameRect,
 }

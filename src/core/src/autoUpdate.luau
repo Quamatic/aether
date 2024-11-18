@@ -7,7 +7,7 @@ local getElementBoundingRect = platform.getElementBoundingRect
 local unwrapElement = platform.unwrapElement
 
 local rects = require(script.Parent.utils.rects)
-local areRectsEqual = rects.areRectsEqual
+local isSameRect = rects.isSameRect
 
 type AutoUpdateEvent = "elements" | "render"
 
@@ -46,7 +46,7 @@ local function autoUpdate(
 
 		local connection = RunService.PreRender:Connect(function()
 			local currentReferenceRect = getElementBoundingRect(reference)
-			if not areRectsEqual(previousReferenceRect, currentReferenceRect) then
+			if not isSameRect(previousReferenceRect, currentReferenceRect) then
 				update()
 			end
 

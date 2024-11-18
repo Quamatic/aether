@@ -17,8 +17,10 @@ export type Input = {
 }
 
 export type Output = {
-	offsets: types.Sides,
-	hidden: boolean,
+	referenceHidden: boolean?,
+	referenceHiddenOffsets: types.SideObject?,
+	escaped: boolean?,
+	escapedOffsets: types.SideObject?,
 }
 
 --[[
@@ -29,7 +31,7 @@ local function hide(input: types.Derivable<Input>): types.Middleware<Output>
 	return {
 		name = "hide",
 		run = function(state)
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 
 			local strategy = config.strategy or "reference-hidden"
 			local detectOverflowConfig = config.detectOverflowConfig or {}
@@ -43,16 +45,25 @@ local function hide(input: types.Derivable<Input>): types.Middleware<Output>
 			local left = overflow.left
 			local right = overflow.right
 
+			local offsets = {
+				top = top - rect.height,
+				bottom = bottom - rect.height,
+				left = left - rect.width,
+				right = right - rect.width,
+			}
+
+			local hidden = top >= 0 or bottom >= 0 or left >= 0 or right >= 0
+
 			return {
-				data = {
-					offsets = {
-						top = top - rect.height,
-						bottom = bottom - rect.height,
-						left = left - rect.width,
-						right = right - rect.width,
+				data = if strategy == "reference-hidden"
+					then {
+						referenceHidden = hidden,
+						referenceHiddenOffsets = offsets,
+					}
+					else {
+						escaped = hidden,
+						escapedOffsets = offsets,
 					},
-					hidden = top >= 0 or bottom >= 0 or left >= 0 or right >= 0,
-				},
 			}
 		end,
 	}

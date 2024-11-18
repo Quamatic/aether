@@ -5,6 +5,8 @@ local computePosition = require(script.Parent.computePosition)
 local platform = require(script.Parent.platform)
 local getElementRects = platform.getElementRects
 
+local MAX_MIDDLEWARE_RESETS = 50
+
 export type ProcessConfig = {
 	--[[
         Where to place the floating element relative to the reference element.
@@ -48,6 +50,7 @@ local function process(reference: types.ReferenceElement, target: GuiObject, con
 	local middlewares = config.middleware or {}
 	local length = #middlewares
 	local index = 0
+	local resetCount = 0
 
 	debug.profilebegin("middleware")
 
@@ -96,7 +99,9 @@ local function process(reference: types.ReferenceElement, target: GuiObject, con
 
 		-- Check for resetting
 		local reset = result.reset
-		if reset then
+		if reset and resetCount <= MAX_MIDDLEWARE_RESETS then
+			resetCount += 1
+
 			if typeof(reset) == "table" then
 				if reset.placement then
 					placement = reset.placement

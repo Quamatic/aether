@@ -1,7 +1,8 @@
 -- Placement
 
 export type Placement = string
-
+export type Side = "top" | "left" | "right" | "bottom"
+export type Alignment = "start" | "end"
 export type Axis = "x" | "y"
 export type Length = "width" | "height"
 
@@ -17,7 +18,7 @@ export type Dimensions = {
 	height: number,
 }
 
-export type Sides = {
+export type SideObject = {
 	top: number,
 	bottom: number,
 	left: number,
@@ -32,15 +33,14 @@ export type PartialSides = {
 }
 
 export type Padding = number | PartialSides
-
 export type Rect = Position & Dimensions
-export type BoundingRect = Rect & Sides
+export type BoundingRect = Rect & SideObject
 
 -- Elements
 
 export type VirtualElement = {
 	contextElement: GuiObject?,
-	getRects: () -> ()?,
+	getNativeRects: (() -> { BoundingRect })?,
 	getBoundingRect: () -> BoundingRect,
 }
 
@@ -89,7 +89,7 @@ export type MiddlewareData = {
 		alignmentOffset: number?,
 	}?,
 	hide: {
-		offsets: Sides,
+		offsets: SideObject,
 		hidden: boolean,
 	}?,
 }
@@ -123,6 +123,6 @@ export type Middleware<T> = {
 export type Boundary = "clipping-ancestors" | GuiObject | Rect
 export type RootBoundary = "layer-collector" | Rect
 
-export type Derivable<T> = T | (() -> T)
+export type Derivable<T> = T | ((state: MiddlewareState) -> T)
 
 return nil

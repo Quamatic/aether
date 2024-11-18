@@ -1,6 +1,6 @@
 local types = require(script.Parent.Parent.types)
 
-local function getPaddingObject(padding: types.Padding): types.Sides
+local function getPaddingObject(padding: types.Padding): types.SideObject
 	return if typeof(padding) == "number"
 		then {
 			top = padding,
@@ -16,6 +16,4 @@ local function getPaddingObject(padding: types.Padding): types.Sides
 		}
 end
 
-return {
-	getPaddingObject = getPaddingObject,
-}
+return getPaddingObject

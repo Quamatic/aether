@@ -103,7 +103,7 @@ local function autoPlacement(input: types.Derivable<Input>): types.Middleware<Ou
 	return {
 		name = "autoPlacement",
 		run = function(state)
-			local config = read(input) :: Input
+			local config = read(input, state) :: Input
 
 			local crossAxis = not not config.crossAxis
 			local alignment = config.alignment

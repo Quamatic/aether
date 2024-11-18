@@ -1,7 +1,6 @@
 local types = require(script.Parent.types)
 
-local _padding = require(script.Parent.utils.padding)
-local getPaddingObject = _padding.getPaddingObject
+local getPaddingObject = require(script.Parent.utils.getPaddingObject)
 
 local rects = require(script.Parent.utils.rects)
 local convertRectToBoundingRect = rects.convertRectToBoundingRect
@@ -18,11 +17,6 @@ local isElement = platform.isElement
 export type DetectOverflowContext = "reference" | "target"
 
 export type DetectOverflowConfig = {
-	--[[
-		The boundary of the overflowing element
-
-		- "layer-collector" The element will be checked relative to its layer collector.
-	]]
 	boundary: types.Boundary?,
 	rootBoundary: types.RootBoundary?,
 	elementContext: DetectOverflowContext?,
@@ -38,7 +32,7 @@ export type DetectOverflowConfig = {
     - negative = how many pixels left before it will overflow
     - 0 = lies flush with the boundary
 ]]
-local function detectOverflow(state: types.MiddlewareState, config: DetectOverflowConfig): types.Sides
+local function detectOverflow(state: types.MiddlewareState, config: DetectOverflowConfig): types.SideObject
 	local rects = state.rects
 	local elements = state.elements
 
