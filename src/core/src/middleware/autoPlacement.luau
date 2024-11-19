@@ -81,12 +81,24 @@ local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis
 	local lowestSpace = math.huge
 
 	for _, overflow in overflows do
-		local _, alignment = getPlacementPosition(overflow.placement)
-		local axisSum = overflow.values[1] + overflow.values[2]
-		local targetValue = if alignment and crossAxis then axisSum else overflow.values[1]
+		local placement = overflow.placement
+		local _, alignment = getPlacementPosition(placement)
 
-		if targetValue < lowestSpace then
-			lowestPlacement = overflow.placement
+		local mainAxisValue = overflow.values[1]
+		local crossAxisValue = overflow.values[2]
+		local oppositeCrossAxisValue = overflow.values[3]
+
+		local targetValue = if alignment and crossAxis
+			then mainAxisValue + crossAxisValue -- Check along the mainAxis and main crossAxis side
+			else mainAxisValue -- Check only the mainAxis
+
+		local fitsOnEachSide = if alignment
+			-- Aligned placements should not check their opposite crossAxis side.
+			then mainAxisValue <= 0 and crossAxisValue <= 0
+			else mainAxisValue <= 0 and crossAxisValue <= 0 and oppositeCrossAxisValue <= 0
+
+		if targetValue < lowestSpace and fitsOnEachSide then
+			lowestPlacement = placement
 			lowestSpace = targetValue
 		end
 	end
@@ -135,11 +147,11 @@ local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<O
 			local overflow = detectOverflow(state, detectOverflowConfig)
 			local currentOverflows: { number }
 			do
-				local sideA, sideB = getAlignmentSides(currentPlacement, state.rects, state.rtl)
+				local main, cross = getAlignmentSides(currentPlacement, state.rects, state.rtl)
 				currentOverflows = {
 					overflow[getPlacementPosition(currentPlacement)],
-					overflow[sideA],
-					overflow[sideB],
+					overflow[main],
+					overflow[cross],
 				}
 			end
 
