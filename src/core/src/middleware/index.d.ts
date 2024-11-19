@@ -221,8 +221,10 @@ export interface HideMiddlewareInput extends DetectOverflowConfig {
 }
 
 export interface HideMiddlewareData {
-	offsets: SideObject;
-	hidden: boolean;
+	referenceHidden?: boolean;
+	referenceHiddenOffsets?: SideObject;
+	escaped?: boolean;
+	escapedOffsets?: SideObject;
 }
 
 /**

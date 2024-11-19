@@ -89,8 +89,10 @@ export type MiddlewareData = {
 		alignmentOffset: number?,
 	}?,
 	hide: {
-		offsets: SideObject,
-		hidden: boolean,
+		referenceHidden: boolean?,
+		referenceHiddenOffsets: SideObject?,
+		escaped: boolean?,
+		escapedOffsets: SideObject?,
 	}?,
 }
 
