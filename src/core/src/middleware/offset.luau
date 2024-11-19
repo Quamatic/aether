@@ -36,11 +36,11 @@ export type Output = types.Position & {
 --[[
     Modifies the placement by translating the floating element along the specified axes.
 ]]
-local function offset(input: types.Derivable<Input>): types.Middleware<Output>
+local function offset(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "offset",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local placement = state.placement
 

@@ -104,11 +104,11 @@ end
 	Provides improved positioning for inline reference elements that can span
 	over multiple lines, such as range selections.
 ]]
-local function inline(input: types.Derivable<Input>): types.Middleware<Output>
+local function inline(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "inline",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local x = config.x
 			local y = config.y

@@ -51,11 +51,11 @@ end
     Optimizes the visibility of the floating element by shifting it in order to
 	keep it in view when it will overflow the clipping boundary.
 ]]
-local function shift(input: types.Derivable<Input>): types.Middleware<Output>
+local function shift(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "offset",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local detectOverflowConfig = config.detectOverflowConfig or {}
 			local checkMainAxis = if config.mainAxis ~= nil then config.mainAxis else true

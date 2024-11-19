@@ -27,11 +27,11 @@ export type Output = {}
 	for instance, prevent it from overflowing the clipping boundary or match the
 	width of the reference element.
 ]]
-local function size(input: types.Derivable<Input>): types.Middleware<Output>
+local function size(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "size",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 			local detectOverflowConfig = config.detectOverflowConfig or {}
 			local apply = config.apply
 

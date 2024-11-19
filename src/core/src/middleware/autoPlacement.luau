@@ -99,11 +99,11 @@ end
 	that has the most space available automatically, without needing to specify a
 	preferred placement. Alternative to `flip`.
 ]]
-local function autoPlacement(input: types.Derivable<Input>): types.Middleware<Output>
+local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "autoPlacement",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local crossAxis = not not config.crossAxis
 			local alignment = config.alignment

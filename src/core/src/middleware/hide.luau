@@ -27,11 +27,11 @@ export type Output = {
     Provides data to hide the floating element in applicable situations, such as
     when it is not in the same clipping context as the reference element.
 ]]
-local function hide(input: types.Derivable<Input>): types.Middleware<Output>
+local function hide(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "hide",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local strategy = config.strategy or "reference-hidden"
 			local detectOverflowConfig = config.detectOverflowConfig or {}

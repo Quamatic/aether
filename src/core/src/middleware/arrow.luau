@@ -29,11 +29,11 @@ export type Output = {
 	Provides data to position an inner element of the floating element so that it
 	appears centered to the reference element.
 ]]
-local function arrow(input: types.Derivable<Input>): types.Middleware<Output>
+local function arrow(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "arrow",
 		run = function(state)
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 
 			local element = config.element
 			if element == nil then

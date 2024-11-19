@@ -107,7 +107,7 @@ end
 	in order to keep it in view when the preferred placement(s) will overflow the
 	clipping boundary. Alternative to `autoPlacement`.
 ]]
-local function flip(input: types.Derivable<Input>): types.Middleware<Output>
+local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "flip",
 		run = function(state)
@@ -118,7 +118,7 @@ local function flip(input: types.Derivable<Input>): types.Middleware<Output>
 				return nil
 			end
 
-			local config = read(input, state) :: Input
+			local config = read(input or {}, state) :: Input
 			local checkMainAxis = if config.mainAxis ~= nil then config.mainAxis else true
 			local checkCrossAxis = if config.crossAxis ~= nil then config.crossAxis else true
 			local specifiedFallbackPlacements = config.fallbackPlacements
