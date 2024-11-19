@@ -97,7 +97,7 @@ local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis
 			then mainAxisValue <= 0 and crossAxisValue <= 0
 			else mainAxisValue <= 0 and crossAxisValue <= 0 and oppositeCrossAxisValue <= 0
 
-		if targetValue < lowestSpace and fitsOnEachSide then
+		if targetValue < lowestSpace or fitsOnEachSide then
 			lowestPlacement = placement
 			lowestSpace = targetValue
 		end
