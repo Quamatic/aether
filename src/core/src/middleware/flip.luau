@@ -1,4 +1,5 @@
 local types = require(script.Parent.Parent.types)
+type Placement = types.Placement
 
 local detectOverflow = require(script.Parent.Parent.detectOverflow)
 type DetectOverflowConfig = detectOverflow.DetectOverflowConfig
@@ -13,7 +14,7 @@ local getAlignmentSides = placement.getAlignmentSides
 
 local read = require(script.Parent.Parent.utils.read)
 
-type FallbackAlignment = "start" | "end" | "none"
+type FallbackAlignment = types.Alignment | "none"
 
 export type Input = {
 	--[[
@@ -29,7 +30,7 @@ export type Input = {
 	--[[
 		Placements to try sequentially if the preferred `placement` does not fit.
 	]]
-	fallbackPlacements: { types.Placement }?,
+	fallbackPlacements: { Placement }?,
 	--[[
 		What strategy to use when no placements fit.
 	]]
@@ -54,8 +55,8 @@ export type Output = {
 	overflows: { types.Overflow },
 }
 
-local function getResetPlacement(overflows: { types.Overflow })
-	local resetPlacement: string?
+local function getResetPlacement(overflows: { types.Overflow }): Placement?
+	local resetPlacement: Placement?
 	local lowestOverflowValue = math.huge
 
 	for _, overflow in overflows do
@@ -74,8 +75,8 @@ local function getResetPlacementFromBestFit(
 	overflows: { types.Overflow },
 	initialSideAxis: string,
 	hasFallbackAxisSideDirection: boolean
-)
-	local resetPlacement: string
+): Placement
+	local resetPlacement: Placement
 	local lowestOverflowValue = math.huge
 
 	for _, overflow in overflows do
@@ -127,14 +128,14 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 			local flipAlignment = if config.flipAlignment ~= nil then config.flipAlignment else true
 			local detectOverflowConfig = config.detectOverflowConfig or {}
 
-			local placement = state.placement
-			local initialPlacement = state.initialPlacement
+			local placement: Placement = state.placement
+			local initialPlacement: Placement = state.initialPlacement
 
 			local side, _ = getPlacementPosition(placement)
 			local initialSideAxis = getPlacementAxes(initialPlacement)
 			local isBasePlacement = getPlacementPosition(initialPlacement) == initialPlacement
 
-			local fallbackPlacements: { string } = if specifiedFallbackPlacements
+			local fallbackPlacements: { Placement } = if specifiedFallbackPlacements
 				then specifiedFallbackPlacements
 				else if isBasePlacement or not flipAlignment
 					then { getOppositePlacement(initialPlacement) }
@@ -152,7 +153,11 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 			end
 
 			local flip = state.data.flip
-			local placements = { initialPlacement, unpack(fallbackPlacements) }
+			local placements = { initialPlacement }
+
+			for _, fallbackPlacement in fallbackPlacements do
+				table.insert(placements, fallbackPlacement)
+			end
 
 			local overflow = detectOverflow(state, detectOverflowConfig)
 			local overflows: { number } = {}
@@ -184,7 +189,7 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			if isOneSideOverflowing then
 				local nextIndex = (if flip then flip.index else 0) + 1
-				local nextPlacement = placements[nextIndex]
+				local nextPlacement: Placement = placements[nextIndex]
 
 				if nextPlacement then
 					return {
@@ -198,7 +203,7 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 					}
 				end
 
-				local resetPlacement = getResetPlacement(cachedOverflows)
+				local resetPlacement: Placement? = getResetPlacement(cachedOverflows)
 				if not resetPlacement then
 					if fallbackStrategy == "best-fit" then
 						resetPlacement =

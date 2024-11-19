@@ -42,7 +42,7 @@ local function offset(input: types.Derivable<Input>?): types.Middleware<Output>
 		run = function(state)
 			local config = read(input or 0, state) :: Input
 
-			local placement = state.placement
+			local placement: types.Placement = state.placement
 
 			-- If the placement is the same and the arrow caused an alignment offset
 			-- then we don't need to change the positioning coordinates.

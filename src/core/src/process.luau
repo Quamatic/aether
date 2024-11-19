@@ -39,8 +39,8 @@ export type ProcessConfigResult = types.Position & {
 ]]
 local function process(reference: types.ReferenceElement, target: GuiObject, config: ProcessConfig): ProcessConfigResult
 	-- Stateful data
-	local initialPlacement = config.placement or "bottom"
-	local placement = initialPlacement
+	local initialPlacement: types.Placement = config.placement or "bottom"
+	local placement: types.Placement = initialPlacement
 	local rtl = not not config.rtl
 	local rects = getElementRects(reference, target)
 	local x, y = computePosition(rects, placement, rtl)

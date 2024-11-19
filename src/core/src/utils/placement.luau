@@ -1,5 +1,8 @@
 local types = require(script.Parent.Parent.types)
 
+type Side = types.Side
+type Placement = types.Placement
+
 local function getPlacementPosition(placement: types.Placement)
 	local segments = string.split(placement, "-")
 
@@ -42,18 +45,18 @@ local function oppositeAlignmentSubstitution(side: string, alignment: string)
 	return side .. if alignment ~= "" then `-{OPPOSITE_ALIGNMENT_MAP[alignment]}` else alignment
 end
 
-local function getOppositePlacement(placement: types.Placement)
+local function getOppositePlacement(placement: types.Placement): Placement
 	local result = string.gsub(placement, "^([^-]*)-?(.*)$", oppsiteSideSubstitution :: never)
-	return result
+	return result :: Placement
 end
 
-local function getOppositeAlignmentPlacement(placement: types.Placement)
+local function getOppositeAlignmentPlacement(placement: types.Placement): Placement
 	local result = string.gsub(placement, "(.-)-(.*)", oppositeAlignmentSubstitution :: never)
-	return result
+	return result :: Placement
 end
 
-local function getExpandedPlacements(placement: types.Placement)
-	local oppositePlacement = getOppositePlacement(placement)
+local function getExpandedPlacements(placement: types.Placement): { Placement }
+	local oppositePlacement: Placement = getOppositePlacement(placement)
 
 	return {
 		getOppositeAlignmentPlacement(placement),
@@ -78,7 +81,7 @@ end
 local function getOppositeAxisPlacements(
 	placement: types.Placement,
 	flipAlignment: boolean,
-	direction: "start" | "end" | "none",
+	direction: types.Alignment | "none",
 	rtl: boolean?
 )
 	local initialSide, alignment = getPlacementPosition(placement)
@@ -94,7 +97,7 @@ local function getOppositeAxisPlacements(
 
 			if flipAlignment then
 				-- index 1 = 3, index 2 = 4
-				listWithAlignments[index + 2] = getOppositeAlignmentPlacement(fullPlacement)
+				listWithAlignments[index + 2] = getOppositeAlignmentPlacement(fullPlacement :: Placement)
 			end
 		end
 
@@ -104,12 +107,12 @@ local function getOppositeAxisPlacements(
 	return list
 end
 
-local function getAlignmentSides(placement: types.Placement, rects: types.ElementRects, rtl: boolean?)
+local function getAlignmentSides(placement: Placement, rects: types.ElementRects, rtl: boolean?): (Side, Side)
 	local side, alignment = getPlacementPosition(placement)
 	local alignmentAxis = if side == "top" or side == "bottom" then "x" else "y" -- opposite axis
 	local dimension = if alignmentAxis == "x" then "width" else "height"
 
-	local mainAlignmentSide = if alignmentAxis == "x"
+	local mainAlignmentSide: Placement = if alignmentAxis == "x"
 		then if alignment == (if rtl then "end" else "start") then "right" else "left"
 		else if alignment == "start" then "bottom" else "top"
 
@@ -117,7 +120,7 @@ local function getAlignmentSides(placement: types.Placement, rects: types.Elemen
 		mainAlignmentSide = getOppositePlacement(mainAlignmentSide)
 	end
 
-	return mainAlignmentSide, getOppositePlacement(mainAlignmentSide)
+	return mainAlignmentSide :: Side, getOppositePlacement(mainAlignmentSide) :: Side
 end
 
 return {

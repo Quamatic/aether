@@ -1,7 +1,16 @@
 -- Placement
 
-export type Placement = string
 export type Side = "top" | "left" | "right" | "bottom"
+export type Placement =
+	Side
+	| "top-start"
+	| "top-end"
+	| "left-start"
+	| "left-end"
+	| "bottom-start"
+	| "bottom-end"
+	| "right-start"
+	| "right-end"
 export type Alignment = "start" | "end"
 export type Axis = "x" | "y"
 export type Length = "width" | "height"
@@ -97,8 +106,8 @@ export type MiddlewareData = {
 }
 
 export type MiddlewareState = Position & {
-	initialPlacement: string,
-	placement: string,
+	initialPlacement: Placement,
+	placement: Placement,
 	data: MiddlewareData,
 	elements: ElementRefs,
 	rects: ElementRects,

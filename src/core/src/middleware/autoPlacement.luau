@@ -1,4 +1,5 @@
 local types = require(script.Parent.Parent.types)
+type Placement = types.Placement
 
 local detectOverflow = require(script.Parent.Parent.detectOverflow)
 type DetectOverflowConfig = detectOverflow.DetectOverflowConfig
@@ -12,7 +13,7 @@ local read = require(script.Parent.Parent.utils.read)
 
 -- List that contains all of the possible placements
 -- Here because this is the only place it is used.
-local ALL_PLACEMENTS = {}
+local ALL_PLACEMENTS: { Placement } = {}
 
 for _, side in { "top", "bottom", "left", "right" } do
 	table.insert(ALL_PLACEMENTS, side)
@@ -43,7 +44,7 @@ export type Input = {
 		Which placements are allowed to be chosen. Placements must be within the
    		`alignment` option if explicitly set.
 	]]
-	allowedPlacements: { types.Placement }?,
+	allowedPlacements: { Placement }?,
 }
 
 export type Output = {
@@ -51,14 +52,10 @@ export type Output = {
 	overflows: { types.Overflow },
 }
 
-local function getPlacementList(
-	autoAlignment: boolean,
-	allowedPlacements: { types.Placement },
-	targetAlignment: string?
-)
-	local allowedPlacementsSortedByAlignment = {}
+local function getPlacementList(autoAlignment: boolean, allowedPlacements: { Placement }, targetAlignment: string?)
+	local allowedPlacementsSortedByAlignment: { Placement } = {}
 
-	for _, placement in allowedPlacements do
+	for _, placement: Placement in allowedPlacements do
 		local side, alignment = getPlacementPosition(placement)
 
 		if targetAlignment then
@@ -76,12 +73,12 @@ local function getPlacementList(
 	return allowedPlacementsSortedByAlignment
 end
 
-local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis: boolean)
+local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis: boolean): types.Placement
 	local lowestPlacement: types.Placement
 	local lowestSpace = math.huge
 
 	for _, overflow in overflows do
-		local placement = overflow.placement
+		local placement: Placement = overflow.placement
 		local _, alignment = getPlacementPosition(placement)
 
 		local mainAxisValue = overflow.values[1]
@@ -130,7 +127,7 @@ local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<O
 
 			local autoPlacementData = state.data.autoPlacement
 			local currentIndex = if autoPlacementData then autoPlacementData.index else 1
-			local currentPlacement = placements[currentIndex]
+			local currentPlacement: Placement = placements[currentIndex]
 
 			if currentPlacement == nil then
 				return nil
@@ -162,7 +159,7 @@ local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<O
 			})
 
 			local nextIndex = currentIndex + 1
-			local nextPlacement = placements[nextIndex]
+			local nextPlacement: Placement = placements[nextIndex]
 
 			if nextPlacement then
 				return {
@@ -176,7 +173,7 @@ local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<O
 				}
 			end
 
-			local resetPlacement = getMostSpaciousPlacement(cachedOverflows, crossAxis)
+			local resetPlacement: Placement = getMostSpaciousPlacement(cachedOverflows, crossAxis)
 			if resetPlacement ~= placement then
 				return {
 					data = {
