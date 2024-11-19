@@ -40,7 +40,7 @@ local function offset(input: types.Derivable<Input>?): types.Middleware<Output>
 	return {
 		name = "offset",
 		run = function(state)
-			local config = read(input or {}, state) :: Input
+			local config = read(input or 0, state) :: Input
 
 			local placement = state.placement
 
