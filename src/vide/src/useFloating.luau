@@ -1,5 +1,7 @@
 local aether = require(script.Parent.Parent.Aether)
-local vide = require(script.Parent.Parent.vide)
+local vide = if script.Parent.Parent:FindFirstChild("Vide")
+	then require(script.Parent.Parent.vide) :: never
+	else require(script.Parent.Parent.Vide)
 
 local source = vide.source
 local effect = vide.effect
@@ -9,6 +11,7 @@ local derive = vide.derive
 local batch = vide.batch
 
 type Derivable<T> = T | (() -> T)
+type Source<T> = (() -> T) & ((value: T) -> T)
 
 export type UseFloatingConfig = {
 	placement: Derivable<aether.Placement>?,
@@ -25,8 +28,8 @@ export type UseFloatingReturn = {
 }
 
 local function useFloating(
-	reference: vide.Source<aether.ReferenceElement?>,
-	target: vide.Source<GuiObject?>,
+	reference: Source<aether.ReferenceElement?>,
+	target: Source<GuiObject?>,
 	config: UseFloatingConfig
 ): UseFloatingReturn
 	local targetPlacement = config.placement or "bottom"

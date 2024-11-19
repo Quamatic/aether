@@ -5,6 +5,6 @@ registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
 [dev-dependencies]
-vide = "centau/vide@^0.3"
+Vide = "centau/vide@^0.3"
 React = "jsdotlua/react@17.2.0"
 ReactRoblox = "jsdotlua/react-roblox@17.2.0"

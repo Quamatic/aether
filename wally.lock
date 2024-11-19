@@ -95,4 +95,4 @@ dependencies = [["collections", "jsdotlua/collections@1.2.7"]]
 [[package]]
 name = "quamatic/aether"
 version = "0.1.0"
-dependencies = [["React", "jsdotlua/react@17.2.0"], ["ReactRoblox", "jsdotlua/react-roblox@17.2.0"], ["vide", "centau/vide@0.3.1"]]
+dependencies = [["React", "jsdotlua/react@17.2.0"], ["ReactRoblox", "jsdotlua/react-roblox@17.2.0"], ["Vide", "centau/vide@0.3.1"]]

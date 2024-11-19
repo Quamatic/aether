@@ -1,5 +1,7 @@
 local Aether = require(script.Parent.Parent.Aether)
-local React = require(script.Parent.Parent.React)
+local React = if script.Parent.Parent:FindFirstChild("react")
+	then require(script.Parent.Parent.react) :: never
+	else require(script.Parent.Parent.React)
 
 local useLatestRef = require(script.Parent.utils.useLatestRef)
 local merge = require(script.Parent.utils.merge)
