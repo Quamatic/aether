@@ -1,4 +1,4 @@
-local vide = require(script.Parent.Parent.Parent.DevPackages.vide)
+local vide = require(script.Parent.Parent.Parent.DevPackages.Vide)
 local Aether = require(script.Parent.Parent.Parent.DevPackages.Aether)
 local AetherVide = require(script.Parent.Parent.Parent.DevPackages.AetherVide)
 
