@@ -1,5 +1,5 @@
 local aether = require(script.Parent.Parent.Aether)
-local vide = if script.Parent.Parent:FindFirstChild("Vide")
+local vide = if script.Parent.Parent:FindFirstChild("vide")
 	then require(script.Parent.Parent.vide) :: never
 	else require(script.Parent.Parent.Vide)
 
