@@ -144,7 +144,7 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			if not specifiedFallbackPlacements and hasFallbackAxisSideDirection then
 				local oppositeAxisPlacements =
-					getOppositeAxisPlacements(initialPlacement, flipAlignment, fallbackAxisSideDirection)
+					getOppositeAxisPlacements(initialPlacement, flipAlignment, fallbackAxisSideDirection, state.rtl)
 
 				for _, oppositeAxisPlacement in oppositeAxisPlacements do
 					table.insert(fallbackPlacements, oppositeAxisPlacement)
@@ -167,9 +167,9 @@ local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
 			end
 
 			if checkCrossAxis then
-				local sideA, sideB = getAlignmentSides(placement, state.rects, false)
-				local valueA = overflow[sideA]
-				local valueB = overflow[sideB]
+				local main, cross = getAlignmentSides(placement, state.rects, state.rtl)
+				local valueA = overflow[main]
+				local valueB = overflow[cross]
 
 				table.insert(overflows, valueA)
 				table.insert(overflows, valueB)

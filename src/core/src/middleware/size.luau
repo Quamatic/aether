@@ -41,7 +41,7 @@ local function size(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			local widthSide, heightSide
 			if side == "top" or side == "bottom" then
-				widthSide = if alignment == "end" then "left" else "right"
+				widthSide = if alignment == (if state.rtl then "start" else "end") then "left" else "right"
 				heightSide = side
 			else
 				widthSide = side

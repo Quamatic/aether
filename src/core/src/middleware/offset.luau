@@ -58,9 +58,8 @@ local function offset(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			local side, alignment = getPlacementPosition(placement)
 			local isVertical = side == "top" or side == "bottom"
-			local rtl = false
 			local mainAxisMultiplier = if side == "left" or side == "top" then -1 else 1
-			local crossAxisMultiplier = if rtl and isVertical then -1 else 1
+			local crossAxisMultiplier = if state.rtl and isVertical then -1 else 1
 
 			local mainAxis: number, crossAxis: number, alignmentAxis: number?
 			if typeof(config) == "number" then
