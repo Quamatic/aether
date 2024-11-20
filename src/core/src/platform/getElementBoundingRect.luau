@@ -21,7 +21,8 @@ end
 local function getElementBoundingRect(
 	element: types.ReferenceElement | LayerCollector,
 	includeScale: boolean?,
-	offsetParent: GuiObject | LayerCollector?
+	offsetParent: types.ContainingElement?,
+	cache: types.Cache
 ): types.BoundingRect
 	local rect: types.BoundingRect
 	local relevantElement: GuiObject | LayerCollector? = nil
@@ -39,9 +40,9 @@ local function getElementBoundingRect(
 	local scale = 1
 	if includeScale then
 		if offsetParent then
-			scale = getScale(offsetParent)
+			scale = getScale(offsetParent, cache)
 		elseif relevantElement then
-			scale = getScale(relevantElement)
+			scale = getScale(relevantElement, cache)
 		end
 	end
 

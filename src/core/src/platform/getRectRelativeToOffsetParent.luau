@@ -4,9 +4,10 @@ local getElementBoundingRect = require(script.Parent.getElementBoundingRect)
 
 local function getRectRelativeToOffsetParent(
 	element: types.ReferenceElement,
-	offsetParent: GuiObject | LayerCollector?
+	offsetParent: types.ContainingElement?,
+	cache: types.Cache
 ): types.Rect
-	local elementRect = getElementBoundingRect(element, true, offsetParent)
+	local elementRect = getElementBoundingRect(element, true, offsetParent, cache)
 	local offsets = { x = 0, y = 0 }
 	local scroll = Vector2.zero
 
@@ -15,7 +16,7 @@ local function getRectRelativeToOffsetParent(
 			scroll = offsetParent.CanvasPosition
 		end
 
-		local offsetRect = getElementBoundingRect(offsetParent, true, offsetParent)
+		local offsetRect = getElementBoundingRect(offsetParent, true, offsetParent, cache)
 		offsets.x = offsetRect.x
 		offsets.y = offsetRect.y
 	end

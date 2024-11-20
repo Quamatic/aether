@@ -38,11 +38,17 @@ export type ProcessConfigResult = types.Position & {
     element next to a given reference element.
 ]]
 local function process(reference: types.ReferenceElement, target: GuiObject, config: ProcessConfig): ProcessConfigResult
+	-- Cache for elements & scales.
+	local cache: types.Cache = {
+		elements = {},
+		scales = {},
+	}
+
 	-- Stateful data
 	local initialPlacement: types.Placement = config.placement or "bottom"
 	local placement: types.Placement = initialPlacement
 	local rtl = not not config.rtl
-	local rects = getElementRects(reference, target)
+	local rects = getElementRects(reference, target, cache)
 	local x, y = computePosition(rects, placement, rtl)
 	local data = {} :: types.MiddlewareData
 
@@ -72,6 +78,7 @@ local function process(reference: types.ReferenceElement, target: GuiObject, con
 			elements = { reference = reference, target = target },
 			rects = rects,
 			rtl = rtl,
+			cache = cache,
 		})
 
 		if result == nil then
@@ -108,7 +115,7 @@ local function process(reference: types.ReferenceElement, target: GuiObject, con
 				end
 
 				if reset.rects then
-					rects = if reset.rects == true then getElementRects(reference, target) else reset.rects
+					rects = if reset.rects == true then getElementRects(reference, target, cache) else reset.rects
 				end
 
 				x, y = computePosition(rects, placement, rtl)

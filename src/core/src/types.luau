@@ -47,6 +47,8 @@ export type BoundingRect = Rect & SideObject
 
 -- Elements
 
+export type ContainingElement = GuiObject | LayerCollector
+
 export type VirtualElement = {
 	contextElement: GuiObject?,
 	getNativeRects: (() -> { BoundingRect })?,
@@ -112,6 +114,7 @@ export type MiddlewareState = Position & {
 	elements: ElementRefs,
 	rects: ElementRects,
 	rtl: boolean,
+	cache: Cache,
 }
 
 export type MiddlewareResult<T> = {
@@ -133,6 +136,11 @@ export type Middleware<T> = {
 
 export type Boundary = "clipping-ancestors" | GuiObject | Rect
 export type RootBoundary = "layer-collector" | Rect
+
+export type Cache = {
+	elements: { [ContainingElement]: { GuiObject } },
+	scales: { [ContainingElement]: number },
+}
 
 export type Derivable<T> = T | ((state: MiddlewareState) -> T)
 

@@ -3,11 +3,15 @@ local types = require(script.Parent.Parent.types)
 local getOffsetParent = require(script.Parent.getOffsetParent)
 local getRectRelativeToOffsetParent = require(script.Parent.getRectRelativeToOffsetParent)
 
-local function getElementRects(reference: types.ReferenceElement, target: GuiObject): types.ElementRects
+local function getElementRects(
+	reference: types.ReferenceElement,
+	target: GuiObject,
+	cache: types.Cache
+): types.ElementRects
 	local targetOffsetParent = getOffsetParent(target)
 
 	return {
-		reference = getRectRelativeToOffsetParent(reference, targetOffsetParent),
+		reference = getRectRelativeToOffsetParent(reference, targetOffsetParent, cache),
 		target = {
 			x = 0,
 			y = 0,

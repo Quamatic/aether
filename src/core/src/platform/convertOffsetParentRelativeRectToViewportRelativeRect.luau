@@ -6,7 +6,8 @@ local getScale = require(script.Parent.getScale)
 
 local function convertOffsetParentRelativeRectToViewportRelativeRect(
 	rect: types.Rect,
-	offsetParent: GuiObject | LayerCollector
+	offsetParent: types.ContainingElement,
+	cache: types.Cache
 ): types.Rect
 	local layerElement = getLayerElement(offsetParent)
 	if layerElement == (offsetParent :: LayerCollector) then
@@ -18,8 +19,8 @@ local function convertOffsetParentRelativeRectToViewportRelativeRect(
 		scroll = offsetParent.CanvasPosition
 	end
 
-	local offsetRect = getElementBoundingRect(offsetParent)
-	local scale = getScale(offsetParent)
+	local offsetRect = getElementBoundingRect(offsetParent, false, nil, cache)
+	local scale = getScale(offsetParent, cache)
 
 	return {
 		x = rect.x * scale - scroll.X * scale + offsetRect.x,

@@ -35,6 +35,7 @@ export type DetectOverflowConfig = {
 local function detectOverflow(state: types.MiddlewareState, config: DetectOverflowConfig): types.SideObject
 	local rects = state.rects
 	local elements = state.elements
+	local cache = state.cache
 
 	-- Config
 	local boundary: types.Boundary = config.boundary or "clipping-ancestors"
@@ -54,12 +55,11 @@ local function detectOverflow(state: types.MiddlewareState, config: DetectOverfl
 		else if element.contextElement
 			then element.contextElement
 			-- If not, then we default to the containing layer.
-			-- TODO: This might not work as expected, especially in plugin context(s)?
 			else getLayerElement(elements.target)
 
 	-- Here we calculate the "clipping" rect, which is the maximum area
 	-- the target element can safely be in.
-	local clippingRect = convertRectToBoundingRect(getClippingRect(rawElement, boundary, rootBoundary))
+	local clippingRect = convertRectToBoundingRect(getClippingRect(rawElement, boundary, rootBoundary, cache))
 
 	-- The rect based on the element context
 	local targetRect = if elementContext == "target"
@@ -73,11 +73,11 @@ local function detectOverflow(state: types.MiddlewareState, config: DetectOverfl
 		else rects.reference
 
 	local offsetParent = getOffsetParent(elements.target)
-	local offsetScale = if offsetParent then getScale(offsetParent) else 1
+	local offsetScale = if offsetParent then getScale(offsetParent, cache) else 1
 
 	local elementRect = convertRectToBoundingRect(
 		if offsetParent
-			then convertOffsetParentRelativeRectToViewportRelativeRect(targetRect, offsetParent)
+			then convertOffsetParentRelativeRectToViewportRelativeRect(targetRect, offsetParent, cache)
 			else targetRect
 	)
 

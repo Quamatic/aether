@@ -1,8 +1,15 @@
+local types = require(script.Parent.Parent.types)
+
 --[[
     Returns the "scale" of an element, which is based on ancestor UIScale's.
     This is needed because UIScale invalidates the position.
 ]]
-local function getScale(element: GuiObject | LayerCollector)
+local function getScale(element: types.ContainingElement, cache: types.Cache)
+	local cached = cache.scales[element]
+	if cached then
+		return cached
+	end
+
 	local scale = 1
 	local current = element :: Instance?
 
@@ -14,6 +21,8 @@ local function getScale(element: GuiObject | LayerCollector)
 
 		current = current.Parent
 	end
+
+	cache.scales[element] = scale
 
 	return scale
 end

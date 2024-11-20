@@ -38,17 +38,27 @@ local function getBoundingRectFromClippingAncestor(element: GuiObject, clippingA
 	return convertRectToBoundingRect(rect)
 end
 
-local function getOverflowAncestors(element: GuiObject)
+-- A "clipping ancestor" is an element with ClipsDescendants.
+-- This returns all clipping ancestors of the given element up the instance tree, while also caching the result.
+local function getClippingElementAncestors(element: GuiObject, cache: types.Cache)
+	local cached = cache.elements[element]
+	if cached then
+		return cached
+	end
+
+	-- Get overflow ancestors
 	local ancestors = {}
 	local current = element.Parent
 
 	while current ~= nil do
-		if element:IsA("GuiObject") and element.ClipsDescendants then
+		if current:IsA("GuiObject") and current.ClipsDescendants then
 			table.insert(ancestors, current :: GuiObject)
 		end
 
 		current = current.Parent
 	end
+
+	cache.elements[element] = ancestors
 
 	return ancestors
 end
@@ -57,12 +67,13 @@ end
 local function getClippingRect(
 	element: GuiObject,
 	boundary: types.Boundary,
-	rootBoundary: types.RootBoundary
+	rootBoundary: types.RootBoundary,
+	cache: types.Cache
 ): types.Rect
 	-- Get initial ancestors
 	local clippingAncestors: { ClippingAncestor }
 	if boundary == "clipping-ancestors" then
-		clippingAncestors = getOverflowAncestors(element)
+		clippingAncestors = getClippingElementAncestors(element, cache)
 	else
 		-- GuiObject or Rect
 		clippingAncestors = { boundary }
