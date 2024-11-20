@@ -6,6 +6,6 @@
   "types": "src/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "publish": "wally publish"
+    "publish:wally": "wally publish"
   }
 }
