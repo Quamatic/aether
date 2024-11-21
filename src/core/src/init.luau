@@ -9,6 +9,7 @@ export type Length = types.Length
 export type Position = types.Position
 
 -- Shapes
+export type SideObject = types.SideObject
 export type Rect = types.Rect
 export type BoundingRect = types.BoundingRect
 export type Padding = types.Padding
