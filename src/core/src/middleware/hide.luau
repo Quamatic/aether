@@ -4,6 +4,7 @@ local detectOverflow = require(script.Parent.Parent.detectOverflow)
 type DetectOverflowConfig = detectOverflow.DetectOverflowConfig
 
 local read = require(script.Parent.Parent.utils.read)
+local merge = require(script.Parent.Parent.utils.merge)
 
 export type Input = {
 	--[[
@@ -34,22 +35,25 @@ local function hide(input: types.Derivable<Input>?): types.Middleware<Output>
 			local config = read(input or {}, state) :: Input
 
 			local strategy = config.strategy or "reference-hidden"
-			local detectOverflowConfig = config.detectOverflowConfig or {}
+			local detectOverflowConfig: DetectOverflowConfig = merge(config.detectOverflowConfig or {}, {
+				elementContext = if strategy == "reference-hidden" then "reference" else "target",
+				altBoundary = strategy == "escaped",
+			})
 
 			local overflow = detectOverflow(state, detectOverflowConfig)
 			local rect = if strategy == "reference-hidden" then state.rects.reference else state.rects.target
 
 			-- Storing these here to check if any side is overflowed inside of `data`.
-			local top = overflow.top
-			local bottom = overflow.bottom
-			local left = overflow.left
-			local right = overflow.right
+			local top = overflow.top - rect.height
+			local bottom = overflow.bottom - rect.height
+			local left = overflow.left - rect.width
+			local right = overflow.right - rect.width
 
 			local offsets = {
-				top = top - rect.height,
-				bottom = bottom - rect.height,
-				left = left - rect.width,
-				right = right - rect.width,
+				top = top,
+				bottom = bottom,
+				left = left,
+				right = right,
 			}
 
 			local hidden = top >= 0 or bottom >= 0 or left >= 0 or right >= 0

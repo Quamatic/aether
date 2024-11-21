@@ -19,17 +19,16 @@ return {
 			placement = "bottom",
 			middleware = {
 				Aether.offset(5),
-				Aether.hide(function()
-					return {
-						detectOverflowConfig = {
-							boundary = boundary(),
-						},
-						strategy = "escaped",
-					}
-				end),
+				Aether.hide({ strategy = "reference-hidden" }),
+				Aether.hide({ strategy = "escaped" }),
 			},
 			whileElementsMounted = Aether.autoUpdate,
 		})
+
+		local function transparency()
+			local hide = floating.data().hide
+			return if hide ~= nil and hide.escaped then 0.5 else 0
+		end
 
 		return Chrome {
 			title = "Hide",
@@ -69,12 +68,14 @@ return {
 					Text = "Tooltip",
 					TextSize = 16,
 					TextColor3 = Color3.fromHex("#ffffff"),
+					TextTransparency = transparency,
 					FontFace = Font.fromEnum(Enum.Font.GothamBold),
 					BackgroundColor3 = Color3.fromHex("#ec4899"),
+					BackgroundTransparency = transparency,
 
 					Visible = function()
 						local hide = floating.data().hide
-						return if hide ~= nil then not hide.hidden else true
+						return if hide ~= nil then not hide.referenceHidden else true
 					end,
 
 					create "UIPadding" {
