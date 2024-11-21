@@ -49,6 +49,8 @@ export type BoundingRect = Rect & SideObject
 
 export type ContainingElement = GuiObject | LayerCollector
 
+export type ElementContext = "reference" | "target"
+
 export type VirtualElement = {
 	contextElement: GuiObject?,
 	getNativeRects: (() -> { BoundingRect })?,
@@ -138,7 +140,7 @@ export type Boundary = "clipping-ancestors" | GuiObject | Rect
 export type RootBoundary = "layer-collector" | Rect
 
 export type Cache = {
-	elements: { [ContainingElement]: { GuiObject } },
+	elements: { [ContainingElement]: { ContainingElement } },
 	scales: { [ContainingElement]: number },
 }
 

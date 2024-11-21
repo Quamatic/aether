@@ -24,6 +24,7 @@ export type MiddlewareData = types.MiddlewareData
 export type MiddlewareState = types.MiddlewareState
 export type MiddlewareResult<T> = types.MiddlewareResult<T>
 export type Middleware<T> = types.Middleware<T>
+export type Derivable<T> = types.Derivable<T>
 
 local process = require(script.process)
 export type ProcessConfig = process.ProcessConfig

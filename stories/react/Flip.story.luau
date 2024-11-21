@@ -12,7 +12,7 @@ local function Demo()
 		placement = "bottom",
 		middleware = {
 			Aether.offset(5),
-			Aether.flip({}),
+			Aether.flip(),
 		},
 		whileElementsMounted = Aether.autoUpdate,
 	})

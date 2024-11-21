@@ -7,7 +7,7 @@ local rects = require(script.Parent.Parent.utils.rects)
 local createRectFromGuiObject = rects.createRectFromGuiObject
 local convertRectToBoundingRect = rects.convertRectToBoundingRect
 
-type ClippingAncestor = GuiObject | types.RootBoundary
+type ClippingAncestor = types.ContainingElement | types.RootBoundary
 
 local EMPTY_RECT: types.Rect = {
 	x = 0,
@@ -16,7 +16,7 @@ local EMPTY_RECT: types.Rect = {
 	height = 0,
 }
 
-local function getBoundingRectFromClippingAncestor(element: GuiObject, clippingAncestor: GuiObject | types.RootBoundary)
+local function getBoundingRectFromClippingAncestor(element: GuiObject, clippingAncestor: ClippingAncestor)
 	local rect = EMPTY_RECT
 
 	if clippingAncestor == "layer-collector" then

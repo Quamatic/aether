@@ -9,11 +9,11 @@ local function getRectRelativeToOffsetParent(
 ): types.Rect
 	local elementRect = getElementBoundingRect(element, true, offsetParent, cache)
 	local offsets = { x = 0, y = 0 }
-	local scroll = Vector2.zero
+	local scrollOffset = Vector2.zero
 
 	if offsetParent then
 		if offsetParent:IsA("ScrollingFrame") then
-			scroll = offsetParent.CanvasPosition
+			scrollOffset = offsetParent.CanvasPosition
 		end
 
 		local offsetRect = getElementBoundingRect(offsetParent, true, offsetParent, cache)
@@ -21,8 +21,8 @@ local function getRectRelativeToOffsetParent(
 		offsets.y = offsetRect.y
 	end
 
-	local x = elementRect.left + scroll.X - offsets.x
-	local y = elementRect.top + scroll.Y - offsets.y
+	local x = elementRect.left + scrollOffset.X - offsets.x
+	local y = elementRect.top + scrollOffset.Y - offsets.y
 
 	return {
 		x = x,

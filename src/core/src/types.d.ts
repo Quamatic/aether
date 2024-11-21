@@ -27,7 +27,7 @@ export type ElementContext = "reference" | "target";
 
 export interface VirtualElement {
 	contextElement?: GuiObject;
-	getLineRects?: () => BoundingRect[];
+	getNativeRects?: () => BoundingRect[];
 	getBoundingRect: () => BoundingRect;
 }
 
@@ -78,8 +78,16 @@ export interface MiddlewareState extends Position {
 	elements: Elements;
 	rects: ElementRects;
 	rtl: boolean;
+	cache: Cache;
 }
 
 // Misc
+
+export type ContainingElement = GuiObject | LayerCollector;
+
+export interface Cache {
+	elements: Map<ContainingElement, ContainingElement[]>;
+	scales: Map<ContainingElement, number>;
+}
 
 export type Derivable<T> = T | (() => T);

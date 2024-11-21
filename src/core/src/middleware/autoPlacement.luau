@@ -73,7 +73,7 @@ local function getPlacementList(autoAlignment: boolean, allowedPlacements: { Pla
 	return allowedPlacementsSortedByAlignment
 end
 
-local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis: boolean): types.Placement
+local function getMostSpaciousPlacement(overflows: { types.Overflow }, crossAxis: boolean): Placement
 	local lowestPlacement: types.Placement
 	local lowestSpace = math.huge
 

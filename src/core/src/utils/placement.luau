@@ -1,6 +1,7 @@
 local types = require(script.Parent.Parent.types)
 
 type Side = types.Side
+type Axis = types.Axis
 type Placement = types.Placement
 
 local function getPlacementPosition(placement: types.Placement)
@@ -12,17 +13,13 @@ local function getPlacementPosition(placement: types.Placement)
 	return side, alignment :: string?
 end
 
-local function getPlacementAxes(placement: types.Placement)
+local function getPlacementAxes(placement: types.Placement): (Axis, Axis)
 	local side, _ = getPlacementPosition(placement)
 
-	local mainAxis = if side == "top" or side == "bottom" then "y" else "x"
-	local crossAxis = if mainAxis == "x" then "y" else "x"
+	local mainAxis: Axis = if side == "top" or side == "bottom" then "y" else "x"
+	local crossAxis: Axis = if mainAxis == "x" then "y" else "x"
 
 	return mainAxis, crossAxis
-end
-
-local function getOppositeAxis(axis: string)
-	return if axis == "x" then "y" else "x"
 end
 
 local OPPOSITE_SIDE_MAP = {
@@ -65,11 +62,11 @@ local function getExpandedPlacements(placement: types.Placement): { Placement }
 	}
 end
 
-local function getSideList(side: string, isStart: boolean, rtl: boolean?): { string }
-	local lr = { "left", "right" }
-	local rl = { "right", "left" }
-	local tb = { "top", "bottom" }
-	local bt = { "bottom", "top" }
+local function getSideList(side: string, isStart: boolean, rtl: boolean?): { Side }
+	local lr: { Side } = { "left", "right" }
+	local rl: { Side } = { "right", "left" }
+	local tb: { Side } = { "top", "bottom" }
+	local bt: { Side } = { "bottom", "top" }
 
 	if side == "top" or side == "bottom" then
 		return if rtl then if isStart then rl else lr else if isStart then lr else rl
@@ -83,17 +80,17 @@ local function getOppositeAxisPlacements(
 	flipAlignment: boolean,
 	direction: types.Alignment | "none",
 	rtl: boolean?
-)
+): { Placement }
 	local initialSide, alignment = getPlacementPosition(placement)
 	local list = getSideList(initialSide, direction == "start", rtl)
 
 	if alignment then
 		-- size = 2 with alignment mapping, with an extra 2 if flipAlignment is enabled.
-		local listWithAlignments = table.create(2 + if flipAlignment then 2 else 0)
+		local listWithAlignments: { Placement } = table.create(2 + if flipAlignment then 2 else 0)
 
 		for index, side in list do
 			local fullPlacement = `{side}-{alignment}`
-			listWithAlignments[index] = fullPlacement
+			listWithAlignments[index] = fullPlacement :: Placement
 
 			if flipAlignment then
 				-- index 1 = 3, index 2 = 4
@@ -126,7 +123,6 @@ end
 return {
 	getPlacementPosition = getPlacementPosition,
 	getPlacementAxes = getPlacementAxes,
-	getOppositeAxis = getOppositeAxis,
 	getOppositePlacement = getOppositePlacement,
 	getOppositeAlignmentPlacement = getOppositeAlignmentPlacement,
 	getExpandedPlacements = getExpandedPlacements,

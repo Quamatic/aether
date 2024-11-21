@@ -14,12 +14,10 @@ local convertOffsetParentRelativeRectToViewportRelativeRect =
 local getScale = platform.getScale
 local isElement = platform.isElement
 
-export type DetectOverflowContext = "reference" | "target"
-
 export type DetectOverflowConfig = {
 	boundary: types.Boundary?,
 	rootBoundary: types.RootBoundary?,
-	elementContext: DetectOverflowContext?,
+	elementContext: types.ElementContext?,
 	altBoundary: boolean?,
 	padding: types.Padding?,
 }
@@ -40,12 +38,12 @@ local function detectOverflow(state: types.MiddlewareState, config: DetectOverfl
 	-- Config
 	local boundary: types.Boundary = config.boundary or "clipping-ancestors"
 	local rootBoundary: types.RootBoundary = config.rootBoundary or "layer-collector"
-	local elementContext: DetectOverflowContext = config.elementContext or "target"
+	local elementContext: types.ElementContext = config.elementContext or "target"
 	local altBoundary = not not config.altBoundary
 	local padding = getPaddingObject(config.padding or 0)
 
 	-- State
-	local altContext: DetectOverflowContext = if elementContext == "target" then "reference" else "target"
+	local altContext: types.ElementContext = if elementContext == "target" then "reference" else "target"
 	local element = elements[if altBoundary then altContext else elementContext]
 
 	-- Clipping boundary

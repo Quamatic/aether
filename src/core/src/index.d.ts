@@ -36,6 +36,7 @@ import type {
 	MiddlewareData,
 	MiddlewareResult,
 	MiddlewareState,
+	Cache,
 } from "./types";
 
 export = Aether;
@@ -80,5 +81,6 @@ declare namespace Aether {
 		MiddlewareData,
 		MiddlewareResult,
 		MiddlewareState,
+		Cache,
 	};
 }

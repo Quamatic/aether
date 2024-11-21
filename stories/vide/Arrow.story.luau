@@ -37,7 +37,7 @@ local function Arrow(props: {
 		return sides[props.placement()]
 	end)
 
-	return create {
+	return create "Frame" {
 		Name = "Arrow",
 
 		AnchorPoint = function()
@@ -49,7 +49,7 @@ local function Arrow(props: {
 		end,
 
 		Size = UDim2.fromOffset(16, 16),
-		BackgroundColor3 = Color3.fromHex("#ec4899"),
+		BackgroundColor3 = Color3.fromHex("#b31a66"),
 		Visible = props.visible,
 
 		action(props.ref),
@@ -68,11 +68,12 @@ return {
 			placement = "bottom",
 			middleware = {
 				Aether.offset(5),
-				Aether.autoPlacement(function()
+				Aether.shift(function()
 					return {
 						detectOverflowConfig = {
 							boundary = boundary(),
 						},
+						crossAxis = true,
 					}
 				end),
 				Aether.arrow(function()
@@ -112,31 +113,37 @@ return {
 					action(boundary),
 				},
 
-				create "TextLabel" {
+				create "Frame" {
 					Name = "Target",
+
+					AutomaticSize = Enum.AutomaticSize.XY,
 
 					Position = function()
 						return UDim2.fromOffset(floating.x(), floating.y())
 					end,
 
-					AutomaticSize = Enum.AutomaticSize.XY,
-					Text = "The arrow is positioned dynamically",
-					TextSize = 16,
-					TextColor3 = Color3.fromHex("#ffffff"),
-					FontFace = Font.fromEnum(Enum.Font.GothamBold),
-					BackgroundColor3 = Color3.fromHex("#ec4899"),
+					BackgroundTransparency = 1,
 
-					create "UIPadding" {
-						PaddingLeft = UDim.new(0, 8),
-						PaddingRight = UDim.new(0, 8),
-						PaddingTop = UDim.new(0, 8),
-						PaddingBottom = UDim.new(0, 8),
+					create "TextLabel" {
+						Name = "Text",
+
+						AutomaticSize = Enum.AutomaticSize.XY,
+						Text = "The arrow is positioned dynamically",
+						TextSize = 16,
+						TextColor3 = Color3.fromHex("#ffffff"),
+						FontFace = Font.fromEnum(Enum.Font.GothamBold),
+						BackgroundColor3 = Color3.fromHex("#ec4899"),
+
+						create "UIPadding" {
+							PaddingLeft = UDim.new(0, 8),
+							PaddingRight = UDim.new(0, 8),
+							PaddingTop = UDim.new(0, 8),
+							PaddingBottom = UDim.new(0, 8),
+						},
 					},
 
 					Arrow {
-						placement = function()
-							return "bottom"
-						end,
+						placement = floating.placement,
 
 						position = function()
 							local arrow = floating.data().arrow
@@ -148,8 +155,9 @@ return {
 						end,
 
 						visible = function()
-							local arrow = floating.data().arrow
-							return arrow and arrow.centerOffset ~= 0
+							--local arrow = floating.data().arrow
+							--return arrow and arrow.centerOffset ~= 0
+							return true
 						end,
 
 						ref = arrow,

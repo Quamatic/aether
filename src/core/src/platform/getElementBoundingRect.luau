@@ -2,7 +2,7 @@ local types = require(script.Parent.Parent.types)
 
 local getScale = require(script.Parent.getScale)
 
-local function createBoundingRectFromElement(element: GuiObject | LayerCollector): types.BoundingRect
+local function createBoundingRectFromElement(element: types.ContainingElement): types.BoundingRect
 	local position = element.AbsolutePosition
 	local size = element.AbsoluteSize
 
@@ -25,7 +25,7 @@ local function getElementBoundingRect(
 	cache: types.Cache
 ): types.BoundingRect
 	local rect: types.BoundingRect
-	local relevantElement: GuiObject | LayerCollector? = nil
+	local relevantElement: types.ContainingElement? = nil
 
 	if typeof(element) == "Instance" then
 		rect = createBoundingRectFromElement(element)

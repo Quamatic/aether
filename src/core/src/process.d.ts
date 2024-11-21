@@ -11,6 +11,10 @@ export interface ProcessConfigResult extends Position {
 	data: MiddlewareData;
 }
 
+/**
+ * Computes the coordinates that will determined the placement of the target
+ * element next to a given reference element.
+ */
 declare function process(reference: ReferenceElement, target: GuiObject, config: ProcessConfig): ProcessConfigResult;
 
 export default process;

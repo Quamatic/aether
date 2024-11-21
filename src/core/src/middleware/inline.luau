@@ -9,12 +9,19 @@ local getPlacementPosition = placement.getPlacementPosition
 
 local platform = require(script.Parent.Parent.platform)
 local getElementRects = platform.getElementRects
+local isElement = platform.isElement
 
 local getPaddingObject = require(script.Parent.Parent.utils.getPaddingObject)
 local read = require(script.Parent.Parent.utils.read)
 
 export type Input = {
+	--[[
+		This is the screen-relative x-axis coordinate which can be passed in to choose a rect.
+	]]
 	x: number?,
+	--[[
+		This is the screen-relative y-axis coordinate which can be passed in to choose a rect.
+	]]
 	y: number?,
 	--[[
 		Represents the padding around a disjoined rect when choosing it.
@@ -28,7 +35,7 @@ local function sortRectsByHeight(a: types.BoundingRect, b: types.BoundingRect)
 	return a.y < b.y
 end
 
-local function max(rects: { types.BoundingRect }, side: string)
+local function max(rects: { types.BoundingRect }, side: types.Side)
 	local highest = 0
 
 	for _, rect in rects do
@@ -40,7 +47,7 @@ local function max(rects: { types.BoundingRect }, side: string)
 	return highest
 end
 
-local function min(rects: { types.BoundingRect }, side: string)
+local function min(rects: { types.BoundingRect }, side: types.Side)
 	local lowest = math.huge
 
 	for _, rect in rects do
@@ -100,6 +107,15 @@ local function isPointFullyInside(x: number, y: number, rect: types.BoundingRect
 		and y < rect.bottom + padding.bottom
 end
 
+local function getNativeRects(reference: types.ReferenceElement): { types.BoundingRect }
+	if isElement(reference) then
+		return {}
+	end
+
+	local getNativeRects = (reference :: types.VirtualElement).getNativeRects
+	return if getNativeRects ~= nil then getNativeRects() else {}
+end
+
 --[[
 	Provides improved positioning for inline reference elements that can span
 	over multiple lines, such as range selections.
@@ -112,11 +128,12 @@ local function inline(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			local x = config.x
 			local y = config.y
-			local padding = getPaddingObject(config.padding or 0)
+			local padding = getPaddingObject(config.padding or 2)
 
-			local nativeRects = {}
+			local elements = state.elements
+			local nativeRects = getNativeRects(elements.reference)
 			local boundingRects = getRectsByLine(nativeRects)
-			local fallback = convertRectToBoundingRect(getRectFromBoundingRects(nativeRects))
+			local fallbackRect = convertRectToBoundingRect(getRectFromBoundingRects(nativeRects))
 
 			local function getBoundingRect()
 				local length = #boundingRects
@@ -129,7 +146,7 @@ local function inline(input: types.Derivable<Input>?): types.Middleware<Output>
 					elseif isPointFullyInside(x, y, second, padding) then
 						return second
 					else
-						return fallback
+						return fallbackRect
 					end
 				elseif length >= 2 then
 					local side = getPlacementPosition(state.placement)
@@ -186,13 +203,13 @@ local function inline(input: types.Derivable<Input>?): types.Middleware<Output>
 						y = top,
 					}
 				else
-					return fallback
+					return fallbackRect
 				end
 			end
 
 			local resetRects = getElementRects({
 				getBoundingRect = getBoundingRect,
-			}, state.elements.target)
+			}, elements.target, state.cache)
 
 			if not isSameRect(state.rects.reference, resetRects.reference) then
 				return {
