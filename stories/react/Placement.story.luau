@@ -80,11 +80,14 @@ end
 
 local function Demo()
 	local placement, setPlacement = React.useState("bottom")
+	local offset, setOffset = React.useState(5)
 
 	local floating = AetherReact.useFloating({
 		placement = placement,
 		middleware = {
-			Aether.offset(5),
+			AetherReact.offset(function()
+				return offset
+			end, { offset }),
 		},
 		whileElementsMounted = Aether.autoUpdate,
 	})
