@@ -60,7 +60,7 @@ export interface OffsetMiddlewareData extends Position {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/offset}
  */
-export function offset(input: DerivableInput<OffsetMiddlewareInput>): Middleware<OffsetMiddlewareData>;
+export function offset(input?: DerivableInput<OffsetMiddlewareInput>): Middleware<OffsetMiddlewareData>;
 
 export interface FlipMiddlewareInput extends DetectOverflowMiddleware {
 	/**
@@ -104,7 +104,7 @@ export interface FlipMiddlewareData {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/flip}
  */
-export function flip(input: DerivableInput<FlipMiddlewareInput>): Middleware<FlipMiddlewareData>;
+export function flip(input?: DerivableInput<FlipMiddlewareInput>): Middleware<FlipMiddlewareData>;
 
 export interface AutoPlacementMiddlewareInput extends DetectOverflowMiddleware {
 	/**
@@ -138,7 +138,7 @@ export interface AutoPlacementMiddlewareData extends FlipMiddlewareData {}
  * @see {@link https://quamatic.github.io/aether/docs/middleware/auto-placement}
  */
 export function autoPlacement(
-	input: DerivableInput<AutoPlacementMiddlewareInput>,
+	input?: DerivableInput<AutoPlacementMiddlewareInput>,
 ): Middleware<AutoPlacementMiddlewareData>;
 
 export interface ShiftMiddlewareInput extends DetectOverflowMiddleware {
@@ -169,7 +169,7 @@ export interface ShiftMiddlewareData extends Position {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/shift}
  */
-export function shift(input: DerivableInput<ShiftMiddlewareInput>): Middleware<ShiftMiddlewareData>;
+export function shift(input?: DerivableInput<ShiftMiddlewareInput>): Middleware<ShiftMiddlewareData>;
 
 export interface LimitShiftMiddlewareInput {
 	/**
@@ -204,7 +204,7 @@ export interface LimitShiftMiddlewareInput {
 /**
  * Built-in `limiter` that will stop `shift()` at a certain point.
  */
-export function limitShift(input: DerivableInput<LimitShiftMiddlewareInput>): Middleware;
+export function limitShift(input?: DerivableInput<LimitShiftMiddlewareInput>): Middleware;
 
 export interface SizeMiddlewareInput extends DetectOverflowConfig {
 	/**
@@ -221,7 +221,7 @@ export interface SizeMiddlewareInput extends DetectOverflowConfig {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/size}
  */
-export function size(input: DerivableInput<SizeMiddlewareInput>): Middleware;
+export function size(input?: DerivableInput<SizeMiddlewareInput>): Middleware;
 
 export interface HideMiddlewareInput extends DetectOverflowConfig {
 	/**
@@ -243,7 +243,7 @@ export interface HideMiddlewareData {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/hide}
  */
-export function hide(input: DerivableInput<HideMiddlewareInput>): Middleware<HideMiddlewareData>;
+export function hide(input?: DerivableInput<HideMiddlewareInput>): Middleware<HideMiddlewareData>;
 
 export interface ArrowMiddlewareInput {
 	/**
@@ -268,7 +268,7 @@ export interface ArrowMiddlewareData extends Partial<Position> {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/arrow}
  */
-export function arrow(input: DerivableInput<ArrowMiddlewareInput>): Middleware<ArrowMiddlewareData>;
+export function arrow(input?: DerivableInput<ArrowMiddlewareInput>): Middleware<ArrowMiddlewareData>;
 
 export interface InlineMiddlewareInput {
 	/**
@@ -291,4 +291,4 @@ export interface InlineMiddlewareInput {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/inline}
  */
-export function inline(input: DerivableInput<InlineMiddlewareInput>): Middleware;
+export function inline(input?: DerivableInput<InlineMiddlewareInput>): Middleware;

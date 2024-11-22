@@ -22,7 +22,10 @@ export interface ReactiveMiddleware extends Middleware {
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/offset}
  */
-export function offset(input: DerivableInput<OffsetMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function offset(
+	input?: DerivableInput<OffsetMiddlewareInput>,
+	dependencies?: DependencyList,
+): ReactiveMiddleware;
 
 /**
  * Optimizes the visibility of the floating element by flipping the `placement`
@@ -31,7 +34,7 @@ export function offset(input: DerivableInput<OffsetMiddlewareInput>, dependencie
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/flip}
  */
-export function flip(input: DerivableInput<FlipMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function flip(input?: DerivableInput<FlipMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
 
 /**
  * Optimizes the visibility of the floating element by choosing the placement
@@ -41,7 +44,7 @@ export function flip(input: DerivableInput<FlipMiddlewareInput>, dependencies?: 
  * @see {@link https://quamatic.github.io/aether/docs/middleware/auto-placement}
  */
 export function autoPlacement(
-	input: DerivableInput<AutoPlacementMiddlewareInput>,
+	input?: DerivableInput<AutoPlacementMiddlewareInput>,
 	dependencies?: DependencyList,
 ): ReactiveMiddleware;
 
@@ -51,7 +54,7 @@ export function autoPlacement(
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/shift}
  */
-export function shift(input: DerivableInput<ShiftMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function shift(input?: DerivableInput<ShiftMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
 
 /**
  * Provides data that allows you to change the size of the floating element —
@@ -60,7 +63,7 @@ export function shift(input: DerivableInput<ShiftMiddlewareInput>, dependencies?
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/size}
  */
-export function size(input: DerivableInput<SizeMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function size(input?: DerivableInput<SizeMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
 
 /**
  * Provides data to hide the floating element in applicable situations, such as
@@ -68,7 +71,7 @@ export function size(input: DerivableInput<SizeMiddlewareInput>, dependencies?: 
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/hide}
  */
-export function hide(input: DerivableInput<HideMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function hide(input?: DerivableInput<HideMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
 
 /**
  * Provides data to position an inner element of the floating element so that it
@@ -76,7 +79,7 @@ export function hide(input: DerivableInput<HideMiddlewareInput>, dependencies?: 
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/arrow}
  */
-export function arrow(input: DerivableInput<ArrowMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function arrow(input?: DerivableInput<ArrowMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
 
 /**
  * Provides improved positioning for inline reference elements that can span
@@ -84,4 +87,7 @@ export function arrow(input: DerivableInput<ArrowMiddlewareInput>, dependencies?
  *
  * @see {@link https://quamatic.github.io/aether/docs/middleware/inline}
  */
-export function inline(input: DerivableInput<InlineMiddlewareInput>, dependencies?: DependencyList): ReactiveMiddleware;
+export function inline(
+	input?: DerivableInput<InlineMiddlewareInput>,
+	dependencies?: DependencyList,
+): ReactiveMiddleware;
