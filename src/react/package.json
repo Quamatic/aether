@@ -2,6 +2,7 @@
   "name": "@rbxts/aether-react",
   "version": "1.0.0",
   "description": "React bindings for Aether.",
+  "repository": "quamatic/aether",
   "main": "src/init.luau",
   "types": "src/index.d.ts",
   "license": "MIT",

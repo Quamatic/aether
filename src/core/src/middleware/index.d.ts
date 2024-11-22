@@ -204,7 +204,7 @@ export interface LimitShiftMiddlewareInput {
 /**
  * Built-in `limiter` that will stop `shift()` at a certain point.
  */
-export function limitShift(input?: DerivableInput<LimitShiftMiddlewareInput>): Middleware;
+export function limitShift(input?: LimitShiftMiddlewareInput): Middleware;
 
 export interface SizeMiddlewareInput extends DetectOverflowConfig {
 	/**

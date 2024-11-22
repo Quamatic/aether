@@ -1,7 +1,8 @@
 {
   "name": "@rbxts/aether",
   "version": "1.0.0",
-  "description": "",
+  "description": " A Roblox library to position floating elements and make interactions for them. ",
+  "repository": "quamatic/aether",
   "main": "src/init.luau",
   "types": "src/index.d.ts",
   "license": "MIT",
