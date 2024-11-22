@@ -15,7 +15,7 @@ type Source<T> = (() -> T) & ((value: T) -> T)
 
 export type UseFloatingConfig = {
 	placement: Derivable<Aether.Placement>?,
-	middleware: Derivable<{ Aether.Middleware<any> }>?,
+	middleware: Derivable<{ Aether.Middleware }>?,
 	whileElementsMounted: (reference: Aether.ReferenceElement, target: GuiObject, update: () -> ()) -> () -> ()?,
 }
 
