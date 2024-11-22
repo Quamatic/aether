@@ -7,6 +7,7 @@ export type Alignment = types.Alignment
 export type Axis = types.Axis
 export type Length = types.Length
 export type Position = types.Position
+export type Dimensions = types.Dimensions
 
 -- Shapes
 export type SideObject = types.SideObject
@@ -17,6 +18,7 @@ export type Padding = types.Padding
 -- Elements
 export type VirtualElement = types.VirtualElement
 export type ReferenceElement = types.ReferenceElement
+export type ContainingElement = types.ContainingElement
 export type ElementRects = types.ElementRects
 export type ElementRefs = types.ElementRefs
 
@@ -24,9 +26,15 @@ export type ElementRefs = types.ElementRefs
 export type MiddlewareData = types.MiddlewareData
 export type MiddlewareState = types.MiddlewareState
 export type MiddlewareResult<T> = types.MiddlewareResult<T>
-export type Middleware<T> = types.Middleware<T>
+export type Middleware<T = {}> = types.Middleware<T>
+
+-- Misc
+export type Boundary = types.Boundary
+export type RootBoundary = types.RootBoundary
+export type Cache = types.Cache
 export type DerivableInput<T> = types.DerivableInput<T>
 
+-- Core
 local process = require(script.process)
 export type ProcessConfig = process.ProcessConfig
 export type ProcessConfigResult = process.ProcessConfigResult
@@ -34,6 +42,9 @@ export type ProcessConfigResult = process.ProcessConfigResult
 local detectOverflow = require(script.detectOverflow)
 export type DetectOverflowConfig = detectOverflow.DetectOverflowConfig
 
+local autoUpdate = require(script.autoUpdate)
+
+-- Middleware
 local middleware = require(script.middleware)
 export type OffsetMiddlewareInput = middleware.OffsetMiddlewareInput
 export type ShiftMiddlewareInput = middleware.ShiftMiddlewareInput
@@ -53,7 +64,7 @@ return table.freeze({
 	-- Core
 	process = process,
 	detectOverflow = detectOverflow,
-	autoUpdate = require(script.autoUpdate),
+	autoUpdate = autoUpdate,
 
 	-- Middleware
 	offset = middleware.offset,
@@ -68,7 +79,7 @@ return table.freeze({
 
 	-- Platform
 	getElementBoundingRect = platform.getElementBoundingRect,
-	getClippignRect = platform.getClippingRect,
+	getClippingRect = platform.getClippingRect,
 	getElementRects = platform.getElementRects,
 	getScale = platform.getScale,
 	getOffsetParent = platform.getOffsetParent,

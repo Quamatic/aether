@@ -6,6 +6,8 @@ export type Side = Aether.Side
 export type Alignment = Aether.Alignment
 export type Axis = Aether.Axis
 export type Length = Aether.Length
+export type Position = Aether.Position
+export type Dimensions = Aether.Dimensions
 
 export type SideObject = Aether.SideObject
 export type Rect = Aether.Rect
@@ -14,6 +16,7 @@ export type Padding = Aether.Padding
 
 export type VirtualElement = Aether.VirtualElement
 export type ReferenceElement = Aether.ReferenceElement
+export type ContainingElement = Aether.ContainingElement
 export type ElementRects = Aether.ElementRects
 export type ElementRefs = Aether.ElementRefs
 
@@ -21,6 +24,10 @@ export type MiddlewareData = Aether.MiddlewareData
 export type MiddlewareState = Aether.MiddlewareState
 export type MiddlewareResult<T> = Aether.MiddlewareResult<T>
 export type Middleware<T> = Aether.Middleware<T>
+
+export type Boundary = Aether.Boundary
+export type RootBoundary = Aether.RootBoundary
+export type Cache = Aether.Cache
 export type DerivableInput<T> = Aether.DerivableInput<T>
 
 -- process
@@ -63,6 +70,7 @@ return {
 	flip = middleware.flip,
 	autoPlacement = middleware.autoPlacement,
 	shift = middleware.shift,
+	limitShift = Aether.limitShift,
 	size = middleware.size,
 	hide = middleware.hide,
 	arrow = middleware.arrow,
@@ -70,7 +78,12 @@ return {
 
 	-- Utility
 	getElementBoundingRect = Aether.getElementBoundingRect,
+	getClippingRect = Aether.getClippingRect,
 	getElementRects = Aether.getElementRects,
+	getScale = Aether.getScale,
+	getOffsetParent = Aether.getOffsetParent,
+	getLayerElement = Aether.getLayerElement,
+	convertOffsetParentRectToRelativeRect = Aether.convertOffsetParentRectToRelativeRect,
 	isElement = Aether.isElement,
 	unwrapElement = Aether.unwrapElement,
 	getPlacementPosition = Aether.getPlacementPosition,

@@ -129,7 +129,7 @@ export type MiddlewareResult<T> = {
 	}?,
 }
 
-export type Middleware<T> = {
+export type Middleware<T = {}> = {
 	name: string,
 	run: (state: MiddlewareState) -> MiddlewareResult<T>?,
 }
