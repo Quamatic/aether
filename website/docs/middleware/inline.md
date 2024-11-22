@@ -14,7 +14,7 @@ This is useful for reference elements such as highlighted text or range selectio
 :::note
 The concept of [ranges](https://developer.mozilla.org/en-US/docs/Web/API/Range) don't exist in Roblox, but since this is a port, the inline feature is still included.
 
-Typically, inline is used for elements like <span> in HTML, allowing for inline text behavior. To achieve similar functionality in Roblox, you would need to implement your own solution for this.
+Typically, inline is used for elements like `<span>` in HTML, allowing for inline text behavior. To achieve similar functionality in Roblox, you would need to implement your own solution for this.
 :::
 
 ## Input
