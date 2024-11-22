@@ -7,6 +7,8 @@ local rects = require(script.Parent.Parent.utils.rects)
 local createRectFromGuiObject = rects.createRectFromGuiObject
 local convertRectToBoundingRect = rects.convertRectToBoundingRect
 
+local isArray = require(script.Parent.Parent.utils.isArray)
+
 type ClippingAncestor = types.ContainingElement | types.RootBoundary
 
 local EMPTY_RECT: types.Rect = {
@@ -78,10 +80,14 @@ local function getClippingRect(
 	-- Get initial ancestors
 	local clippingAncestors: { ClippingAncestor }
 	if boundary == "clipping-ancestors" then
+		-- Automatic ancestor detection
 		clippingAncestors = getClippingElementAncestors(element, cache)
+	elseif isArray(boundary) then
+		-- Array of GuiObject's
+		clippingAncestors = table.clone(boundary)
 	else
 		-- GuiObject or Rect
-		clippingAncestors = { boundary }
+		clippingAncestors = { boundary :: GuiObject | types.Rect }
 	end
 
 	-- Insert root boundary
