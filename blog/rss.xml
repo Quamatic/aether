@@ -1,18 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Aether Blog</title>
         <link>https://quamatic.github.io/aether/blog</link>
         <description>Aether Blog</description>
-        <lastBuildDate>Sat, 16 Nov 2024 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 22 Nov 2024 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
         <item>
-            <title><![CDATA[Release]]></title>
-            <link>https://quamatic.github.io/aether/blog/2024/11/16/release</link>
-            <guid>https://quamatic.github.io/aether/blog/2024/11/16/release</guid>
-            <pubDate>Sat, 16 Nov 2024 00:00:00 GMT</pubDate>
+            <title><![CDATA[Aether v1.0.0]]></title>
+            <link>https://quamatic.github.io/aether/blog/2024/11/22/core/release</link>
+            <guid>https://quamatic.github.io/aether/blog/2024/11/22/core/release</guid>
+            <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Aether v1.0.0 released!]]></description>
+            <content:encoded><![CDATA[<p>Aether v1.0.0 released!</p>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Aether React v1.0.0]]></title>
+            <link>https://quamatic.github.io/aether/blog/2024/11/22/react/release</link>
+            <guid>https://quamatic.github.io/aether/blog/2024/11/22/react/release</guid>
+            <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Aether React v1.0.0 released!]]></description>
+            <content:encoded><![CDATA[<p>Aether React v1.0.0 released!</p>]]></content:encoded>
+        </item>
+        <item>
+            <title><![CDATA[Aether Vide v1.0.0]]></title>
+            <link>https://quamatic.github.io/aether/blog/2024/11/22/vide/release</link>
+            <guid>https://quamatic.github.io/aether/blog/2024/11/22/vide/release</guid>
+            <pubDate>Fri, 22 Nov 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Aether Vide v1.0.0 released!]]></description>
+            <content:encoded><![CDATA[<p>Aether Vide v1.0.0 released!</p>]]></content:encoded>
         </item>
     </channel>
 </rss>

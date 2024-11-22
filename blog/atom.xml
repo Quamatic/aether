@@ -2,15 +2,41 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://quamatic.github.io/aether/blog</id>
     <title>Aether Blog</title>
-    <updated>2024-11-16T00:00:00.000Z</updated>
+    <updated>2024-11-22T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://quamatic.github.io/aether/blog"/>
     <subtitle>Aether Blog</subtitle>
     <entry>
-        <title type="html"><![CDATA[Release]]></title>
-        <id>https://quamatic.github.io/aether/blog/2024/11/16/release</id>
-        <link href="https://quamatic.github.io/aether/blog/2024/11/16/release"/>
-        <updated>2024-11-16T00:00:00.000Z</updated>
+        <title type="html"><![CDATA[Aether v1.0.0]]></title>
+        <id>https://quamatic.github.io/aether/blog/2024/11/22/core/release</id>
+        <link href="https://quamatic.github.io/aether/blog/2024/11/22/core/release"/>
+        <updated>2024-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Aether v1.0.0 released!]]></summary>
+        <content type="html"><![CDATA[<p>Aether v1.0.0 released!</p>]]></content>
+        <author>
+            <name>quamatic</name>
+            <uri>https://github.com/quamatic</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Aether React v1.0.0]]></title>
+        <id>https://quamatic.github.io/aether/blog/2024/11/22/react/release</id>
+        <link href="https://quamatic.github.io/aether/blog/2024/11/22/react/release"/>
+        <updated>2024-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Aether React v1.0.0 released!]]></summary>
+        <content type="html"><![CDATA[<p>Aether React v1.0.0 released!</p>]]></content>
+        <author>
+            <name>quamatic</name>
+            <uri>https://github.com/quamatic</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Aether Vide v1.0.0]]></title>
+        <id>https://quamatic.github.io/aether/blog/2024/11/22/vide/release</id>
+        <link href="https://quamatic.github.io/aether/blog/2024/11/22/vide/release"/>
+        <updated>2024-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Aether Vide v1.0.0 released!]]></summary>
+        <content type="html"><![CDATA[<p>Aether Vide v1.0.0 released!</p>]]></content>
         <author>
             <name>quamatic</name>
             <uri>https://github.com/quamatic</uri>

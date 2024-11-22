@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[846],{8294:t=>{t.exports=JSON.parse('{"authors":[{"name":"quamatic","title":"Maintainer","url":"https://github.com/quamatic","imageURL":"https://avatars.githubusercontent.com/u/54919069?v=4","key":"quamatic","page":null,"count":1}]}')}}]);
