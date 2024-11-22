@@ -16,7 +16,7 @@ This package provides `react` bindings for Aether.
 
     ```toml
     [dependencies]
-    AetherReact = "quamatic/aether-react@VERSION"
+    AetherReact = "quamatic/aether-react@0.1.0"
     ```
 
   </TabItem>

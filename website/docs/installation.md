@@ -18,7 +18,7 @@ This is the core package for Aether.
 
     ```toml
     [dependencies]
-    Aether = "quamatic/aether@VERSION"
+    Aether = "quamatic/aether@0.1.0"
     ```
 
   </TabItem>

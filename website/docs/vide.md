@@ -16,7 +16,7 @@ This package provides `vide` bindings for Aether.
 
     ```toml
     [dependencies]
-    AetherVide = "quamatic/aether-vide@VERSION"
+    AetherVide = "quamatic/aether-vide@0.1.0"
     ```
 
   </TabItem>
