@@ -16,6 +16,11 @@ local function insert<T>(dependencies: DependencyList, input: T)
 	end
 end
 
+--[[
+    Modifies the placement by translating the floating element along the specified axes.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/offset
+]]
 local function offset(
 	input: Aether.DerivableInput<Aether.OffsetMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -32,6 +37,13 @@ local function offset(
 	}
 end
 
+--[[
+	Optimizes the visibility of the floating element by flipping the `placement`
+	in order to keep it in view when the preferred placement(s) will overflow the
+	clipping boundary. Alternative to `autoPlacement`.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/flip
+]]
 local function flip(
 	input: Aether.DerivableInput<Aether.FlipMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -48,6 +60,13 @@ local function flip(
 	}
 end
 
+--[[
+	Optimizes the visibility of the floating element by choosing the placement
+	that has the most space available automatically, without needing to specify a
+	preferred placement. Alternative to `flip`.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/auto-placement
+]]
 local function autoPlacement(
 	input: Aether.DerivableInput<Aether.AutoPlacementMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -64,6 +83,12 @@ local function autoPlacement(
 	}
 end
 
+--[[
+    Optimizes the visibility of the floating element by shifting it in order to
+	keep it in view when it will overflow the clipping boundary.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/shift
+]]
 local function shift(
 	input: Aether.DerivableInput<Aether.ShiftMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -80,6 +105,13 @@ local function shift(
 	}
 end
 
+--[[
+	Provides data that allows you to change the size of the floating element —
+	for instance, prevent it from overflowing the clipping boundary or match the
+	width of the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/size
+]]
 local function size(
 	input: Aether.DerivableInput<Aether.SizeMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -96,6 +128,12 @@ local function size(
 	}
 end
 
+--[[
+    Provides data to hide the floating element in applicable situations, such as
+    when it is not in the same clipping context as the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/hide
+]]
 local function hide(
 	input: Aether.DerivableInput<Aether.HideMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -112,6 +150,12 @@ local function hide(
 	}
 end
 
+--[[
+	Provides data to position an inner element of the floating element so that it
+	appears centered to the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/arrow
+]]
 local function arrow(
 	input: Aether.DerivableInput<Aether.ArrowMiddlewareInput>?,
 	dependencies: DependencyList?
@@ -128,6 +172,12 @@ local function arrow(
 	}
 end
 
+--[[
+	Provides improved positioning for inline reference elements that can span
+	over multiple lines, such as range selections.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/inline
+]]
 local function inline(
 	input: Aether.DerivableInput<Aether.InlineMiddlewareInput>?,
 	dependencies: DependencyList?
