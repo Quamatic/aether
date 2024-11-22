@@ -50,7 +50,7 @@ local function max(rects: { BoundingRect }, side: Side)
 	return highest
 end
 
-local function min(rects: { types.BoundingRect }, side: Side)
+local function min(rects: { BoundingRect }, side: Side)
 	local lowest = math.huge
 
 	for _, rect in rects do

@@ -1,4 +1,6 @@
 local types = require(script.Parent.Parent.types)
+type Axis = types.Axis
+type Position = types.Position
 
 local detectOverflow = require(script.Parent.Parent.detectOverflow)
 type DetectOverflowConfig = detectOverflow.DetectOverflowConfig
@@ -9,7 +11,7 @@ local getPlacementPosition = placement.getPlacementPosition
 
 local read = require(script.Parent.Parent.utils.read)
 
-type LimiterFn = (state: types.MiddlewareState) -> types.Position
+type LimiterFn = (state: types.MiddlewareState) -> Position
 
 export type Input = {
 	--[[
@@ -33,7 +35,7 @@ export type Input = {
 	limiter: LimiterFn?,
 }
 
-export type Output = types.Position & {
+export type Output = Position & {
 	enabled: {
 		x: boolean,
 		y: boolean,
@@ -64,7 +66,7 @@ local function shift(input: types.DerivableInput<Input>?): types.Middleware<Outp
 			local checkCrossAxis = if config.crossAxis ~= nil then config.crossAxis else false
 			local limiter = config.limiter or defaultLimiterFn
 
-			local position: types.Position = { x = state.x, y = state.y }
+			local position: Position = { x = state.x, y = state.y }
 			local mainAxis, crossAxis = getPlacementAxes(state.placement)
 
 			local overflow = detectOverflow(state, detectOverflowConfig)
@@ -145,8 +147,8 @@ type LimitShiftInput = {
 --[[
     Built-in `limiter` that will stop `shift()` at a certain point.
 ]]
-local function limitShift(input: types.DerivableInput<LimitShiftInput>)
-	return function(state)
+local function limitShift(input: LimitShiftInput)
+	return function(state): Position
 		local config = read(input, state) :: LimitShiftInput
 
 		local offset = config.offset or 0
@@ -154,10 +156,10 @@ local function limitShift(input: types.DerivableInput<LimitShiftInput>)
 		local checkCrossAxis = if config.crossAxis ~= nil then config.crossAxis else true
 
 		local rects = state.rects
-		local crossAxis, mainAxis = getPlacementAxes(state.placement)
-		local position: types.Position = { x = state.x, y = state.y }
-		local mainAxisValue = position[mainAxis]
-		local crossAxisValue = position[crossAxis]
+		local crossAxis: Axis, mainAxis: Axis = getPlacementAxes(state.placement)
+		local position: Position = { x = state.x, y = state.y }
+		local mainAxisValue: number = position[mainAxis]
+		local crossAxisValue: number = position[crossAxis]
 
 		local mainAxisOffset: number, crossAxisOffset: number
 		if typeof(offset) == "number" then
@@ -196,7 +198,7 @@ local function limitShift(input: types.DerivableInput<LimitShiftInput>)
 		return {
 			[mainAxis] = mainAxisValue,
 			[crossAxis] = crossAxisValue,
-		}
+		} :: Position
 	end
 end
 
