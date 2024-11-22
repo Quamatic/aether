@@ -1,6 +1,6 @@
 // Core
 import process, { ProcessConfig, ProcessConfigResult } from "./process";
-import detectOverflow, { DetectOverflowConfig, Boundary, RootBoundary } from "./detectOverflow";
+import detectOverflow, { DetectOverflowConfig } from "./detectOverflow";
 import autoUpdate from "./autoUpdate";
 
 // Middleware
@@ -68,6 +68,8 @@ import type {
 	MiddlewareResult,
 	MiddlewareState,
 	DerivableInput,
+	Boundary,
+	RootBoundary,
 	Cache,
 } from "./types";
 
@@ -77,7 +79,7 @@ export as namespace Aether;
 declare namespace Aether {
 	// Processing
 	export { process, ProcessConfig, ProcessConfigResult };
-	export { detectOverflow, DetectOverflowConfig, Boundary, RootBoundary };
+	export { detectOverflow, DetectOverflowConfig };
 	export { autoUpdate };
 
 	// Middleware
@@ -115,6 +117,8 @@ declare namespace Aether {
 		MiddlewareResult,
 		MiddlewareState,
 		DerivableInput,
+		Boundary,
+		RootBoundary,
 		Cache,
 	};
 

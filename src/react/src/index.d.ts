@@ -24,7 +24,6 @@ import type {
 	MiddlewareState,
 	MiddlewareResult,
 	Middleware,
-	DerivableInput,
 	ProcessConfig,
 	ProcessConfigResult,
 	DetectOverflowConfig,
@@ -36,6 +35,9 @@ import type {
 	HideMiddlewareInput,
 	ArrowMiddlewareInput,
 	InlineMiddlewareInput,
+	Boundary,
+	RootBoundary,
+	DerivableInput,
 	Cache,
 } from "@rbxts/aether";
 
@@ -100,7 +102,6 @@ declare namespace AetherReact {
 		MiddlewareState,
 		MiddlewareResult,
 		Middleware,
-		DerivableInput,
 		ProcessConfig,
 		ProcessConfigResult,
 		DetectOverflowConfig,
@@ -112,6 +113,9 @@ declare namespace AetherReact {
 		HideMiddlewareInput,
 		ArrowMiddlewareInput,
 		InlineMiddlewareInput,
+		DerivableInput,
+		Boundary,
+		RootBoundary,
 		Cache,
 	};
 

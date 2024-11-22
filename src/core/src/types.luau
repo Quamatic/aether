@@ -136,7 +136,7 @@ export type Middleware<T = {}> = {
 
 -- Misc
 
-export type Boundary = "clipping-ancestors" | GuiObject | Rect
+export type Boundary = "clipping-ancestors" | GuiObject | { GuiObject } | Rect
 export type RootBoundary = "layer-collector" | Rect
 
 export type Cache = {

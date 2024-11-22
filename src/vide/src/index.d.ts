@@ -22,7 +22,6 @@ import type {
 	MiddlewareState,
 	MiddlewareResult,
 	Middleware,
-	DerivableInput,
 	ProcessConfig,
 	ProcessConfigResult,
 	DetectOverflowConfig,
@@ -34,6 +33,10 @@ import type {
 	HideMiddlewareInput,
 	ArrowMiddlewareInput,
 	InlineMiddlewareInput,
+	DerivableInput,
+	Boundary,
+	RootBoundary,
+	Cache,
 } from "@rbxts/aether";
 
 // Core
@@ -97,7 +100,6 @@ declare namespace AetherVide {
 		MiddlewareState,
 		MiddlewareResult,
 		Middleware,
-		DerivableInput,
 		ProcessConfig,
 		ProcessConfigResult,
 		DetectOverflowConfig,
@@ -109,6 +111,10 @@ declare namespace AetherVide {
 		HideMiddlewareInput,
 		ArrowMiddlewareInput,
 		InlineMiddlewareInput,
+		DerivableInput,
+		Boundary,
+		RootBoundary,
+		Cache,
 	};
 
 	// Core
