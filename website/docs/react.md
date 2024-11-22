@@ -386,7 +386,9 @@ The floating (target) element.
 
 ## Reactive middleware
 
-When using stateful values inside _functions_ aren't fresh or reacftive.
+When using stateful values inside _functions_, those values aren't fresh or reactive.
+
+For example:
 
 <Tabs groupId="package-manager">
   <TabItem value="wally" label="luau" default>
@@ -418,7 +420,7 @@ When using stateful values inside _functions_ aren't fresh or reacftive.
   </TabItem>
 </Tabs>
 
-Specifying the dependencies as a second argument of any middleware function will keep it reactive:
+However, the package allows you to the specify dependencies as a second argument of any middleware function that will keep it reactive:
 
 <Tabs groupId="package-manager">
   <TabItem value="wally" label="luau" default>
