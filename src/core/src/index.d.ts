@@ -1,8 +1,38 @@
+// Core
 import process, { ProcessConfig, ProcessConfigResult } from "./process";
 import detectOverflow, { DetectOverflowConfig, Boundary, RootBoundary } from "./detectOverflow";
 import autoUpdate from "./autoUpdate";
 
+// Middleware
 import { offset, flip, autoPlacement, shift, limitShift, size, hide, arrow, inline } from "./middleware";
+
+// Platform
+import {
+	getElementBoundingRect,
+	getClippingRect,
+	getElementRects,
+	getScale,
+	getOffsetParent,
+	getLayerElement,
+	convertOffsetParentRectToRelativeRect,
+	isElement,
+	unwrapElement,
+} from "./platform";
+
+// Utility
+import {
+	getPlacementPosition,
+	getPlacementAxes,
+	getOppositePlacement,
+	getOppositeAlignmentPlacement,
+	getExpandedPlacements,
+	getOppositeAxisPlacements,
+	getAlignmentSides,
+} from "./utils/placement";
+import { convertRectToBoundingRect, isSameRect } from "./utils/rects";
+import getPaddingObject from "./utils/getPaddingObject";
+import read from "./utils/read";
+
 import type {
 	OffsetMiddlewareInput,
 	FlipMiddlewareInput,
@@ -28,14 +58,16 @@ import type {
 	SideObject,
 	Padding,
 	VirtualElement,
+	ContainingElement,
 	ElementRects,
-	Elements,
+	ElementRefs,
 	ElementContext,
 	ReferenceElement,
 	Middleware,
 	MiddlewareData,
 	MiddlewareResult,
 	MiddlewareState,
+	DerivableInput,
 	Cache,
 } from "./types";
 
@@ -73,14 +105,44 @@ declare namespace Aether {
 		SideObject,
 		Padding,
 		VirtualElement,
+		ContainingElement,
 		ElementRects,
-		Elements,
+		ElementRefs,
 		ElementContext,
 		ReferenceElement,
 		Middleware,
 		MiddlewareData,
 		MiddlewareResult,
 		MiddlewareState,
+		DerivableInput,
 		Cache,
+	};
+
+	// Platform
+	export {
+		getElementBoundingRect,
+		getClippingRect,
+		getElementRects,
+		getScale,
+		getOffsetParent,
+		getLayerElement,
+		convertOffsetParentRectToRelativeRect,
+		isElement,
+		unwrapElement,
+	};
+
+	// Utility
+	export {
+		getPlacementPosition,
+		getPlacementAxes,
+		getOppositePlacement,
+		getOppositeAlignmentPlacement,
+		getExpandedPlacements,
+		getOppositeAxisPlacements,
+		getAlignmentSides,
+		convertRectToBoundingRect,
+		isSameRect,
+		getPaddingObject,
+		read,
 	};
 }

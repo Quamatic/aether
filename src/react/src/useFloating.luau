@@ -40,6 +40,11 @@ export type UseFloatingReturn = UseFloatingData & {
 	},
 }
 
+--[[
+	Computes the `x` and `y` coordinates that will place the floating element next to a reference element.
+
+	More information here: https://quamatic.github.io/aether/docs/react
+]]
 local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 	local placement: Aether.Placement = config.placement or "bottom"
 	local middleware = config.middleware or {}

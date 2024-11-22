@@ -27,6 +27,11 @@ export type UseFloatingReturn = {
 	update: () -> (),
 }
 
+--[[
+	Computes the `x` and `y` coordinates that will place the floating element next to a reference element.
+
+	More information here: https://quamatic.github.io/aether/docs/vide
+]]
 local function useFloating(
 	reference: Source<Aether.ReferenceElement?>,
 	target: Source<GuiObject?>,

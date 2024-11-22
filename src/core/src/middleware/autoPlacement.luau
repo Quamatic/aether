@@ -107,8 +107,10 @@ end
 	Optimizes the visibility of the floating element by choosing the placement
 	that has the most space available automatically, without needing to specify a
 	preferred placement. Alternative to `flip`.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/auto-placement
 ]]
-local function autoPlacement(input: types.Derivable<Input>?): types.Middleware<Output>
+local function autoPlacement(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "autoPlacement",
 		run = function(state)

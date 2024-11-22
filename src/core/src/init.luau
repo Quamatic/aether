@@ -25,7 +25,7 @@ export type MiddlewareData = types.MiddlewareData
 export type MiddlewareState = types.MiddlewareState
 export type MiddlewareResult<T> = types.MiddlewareResult<T>
 export type Middleware<T> = types.Middleware<T>
-export type Derivable<T> = types.Derivable<T>
+export type DerivableInput<T> = types.DerivableInput<T>
 
 local process = require(script.process)
 export type ProcessConfig = process.ProcessConfig
@@ -68,7 +68,12 @@ return table.freeze({
 
 	-- Platform
 	getElementBoundingRect = platform.getElementBoundingRect,
+	getClippignRect = platform.getClippingRect,
 	getElementRects = platform.getElementRects,
+	getScale = platform.getScale,
+	getOffsetParent = platform.getOffsetParent,
+	getLayerElement = platform.getLayerElement,
+	convertOffsetParentRectToRelativeRect = platform.convertOffsetParentRectToRelativeRect,
 	isElement = platform.isElement,
 	unwrapElement = platform.unwrapElement,
 

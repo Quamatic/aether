@@ -50,8 +50,10 @@ end
 --[[
     Optimizes the visibility of the floating element by shifting it in order to
 	keep it in view when it will overflow the clipping boundary.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/shift
 ]]
-local function shift(input: types.Derivable<Input>?): types.Middleware<Output>
+local function shift(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "offset",
 		run = function(state)
@@ -143,7 +145,7 @@ type LimitShiftInput = {
 --[[
     Built-in `limiter` that will stop `shift()` at a certain point.
 ]]
-local function limitShift(input: types.Derivable<LimitShiftInput>)
+local function limitShift(input: types.DerivableInput<LimitShiftInput>)
 	return function(state)
 		local config = read(input, state) :: LimitShiftInput
 

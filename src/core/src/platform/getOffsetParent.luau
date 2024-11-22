@@ -1,6 +1,10 @@
--- The equivalent of the offsetParent in Roblox is literally just the containing parent element of another.
--- However, this is mainly used in the case of a user having "special" instances that aren't technically
--- the parent of a gui element, such as a Folder.
+--[[
+	Returns the "offset" parent of the given element.
+ 
+	The "offset" parent is the first valid parent of the given element. Most of the time,
+	this is just the `Parent` value, but there are cases where a `Folder` instance may be used.
+	Because of that, this is useful for being safe.
+]]
 local function getOffsetParent(element: GuiObject)
 	return element:FindFirstAncestorWhichIsA("GuiObject")
 end

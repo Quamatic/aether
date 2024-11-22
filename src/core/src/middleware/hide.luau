@@ -27,8 +27,10 @@ export type Output = {
 --[[
     Provides data to hide the floating element in applicable situations, such as
     when it is not in the same clipping context as the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/hide
 ]]
-local function hide(input: types.Derivable<Input>?): types.Middleware<Output>
+local function hide(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "hide",
 		run = function(state)

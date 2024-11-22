@@ -107,8 +107,10 @@ end
 	Optimizes the visibility of the floating element by flipping the `placement`
 	in order to keep it in view when the preferred placement(s) will overflow the
 	clipping boundary. Alternative to `autoPlacement`.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/flip
 ]]
-local function flip(input: types.Derivable<Input>?): types.Middleware<Output>
+local function flip(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "flip",
 		run = function(state)

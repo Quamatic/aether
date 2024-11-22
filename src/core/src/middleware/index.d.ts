@@ -2,7 +2,7 @@ import { DetectOverflowConfig } from "../detectOverflow";
 import {
 	Alignment,
 	Axis,
-	Derivable,
+	DerivableInput,
 	Middleware,
 	MiddlewareState,
 	Padding,
@@ -57,8 +57,10 @@ export interface OffsetMiddlewareData extends Position {
 
 /**
  * Modifies the placement by translating the floating element along the specified axes.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/offset}
  */
-export function offset(input: Derivable<OffsetMiddlewareInput>): Middleware<OffsetMiddlewareData>;
+export function offset(input: DerivableInput<OffsetMiddlewareInput>): Middleware<OffsetMiddlewareData>;
 
 export interface FlipMiddlewareInput extends DetectOverflowMiddleware {
 	/**
@@ -99,8 +101,10 @@ export interface FlipMiddlewareData {
  * Optimizes the visibility of the floating element by flipping the `placement`
  * in order to keep it in view when the preferred placement(s) will overflow the
  * clipping boundary. Alternative to `autoPlacement`.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/flip}
  */
-export function flip(input: Derivable<FlipMiddlewareInput>): Middleware<FlipMiddlewareData>;
+export function flip(input: DerivableInput<FlipMiddlewareInput>): Middleware<FlipMiddlewareData>;
 
 export interface AutoPlacementMiddlewareInput extends DetectOverflowMiddleware {
 	/**
@@ -130,8 +134,12 @@ export interface AutoPlacementMiddlewareData extends FlipMiddlewareData {}
  * Optimizes the visibility of the floating element by choosing the placement
  * that has the most space available automatically, without needing to specify a
  * preferred placement. Alternative to `flip`.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/auto-placement}
  */
-export function autoPlacement(input: Derivable<AutoPlacementMiddlewareInput>): Middleware<AutoPlacementMiddlewareData>;
+export function autoPlacement(
+	input: DerivableInput<AutoPlacementMiddlewareInput>,
+): Middleware<AutoPlacementMiddlewareData>;
 
 export interface ShiftMiddlewareInput extends DetectOverflowMiddleware {
 	/**
@@ -158,8 +166,10 @@ export interface ShiftMiddlewareData extends Position {
 /**
  * Optimizes the visibility of the floating element by shifting it in order to
  * keep it in view when it will overflow the clipping boundary.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/shift}
  */
-export function shift(input: Derivable<ShiftMiddlewareInput>): Middleware<ShiftMiddlewareData>;
+export function shift(input: DerivableInput<ShiftMiddlewareInput>): Middleware<ShiftMiddlewareData>;
 
 export interface LimitShiftMiddlewareInput {
 	/**
@@ -194,7 +204,7 @@ export interface LimitShiftMiddlewareInput {
 /**
  * Built-in `limiter` that will stop `shift()` at a certain point.
  */
-export function limitShift(input: Derivable<LimitShiftMiddlewareInput>): Middleware;
+export function limitShift(input: DerivableInput<LimitShiftMiddlewareInput>): Middleware;
 
 export interface SizeMiddlewareInput extends DetectOverflowConfig {
 	/**
@@ -204,14 +214,14 @@ export interface SizeMiddlewareInput extends DetectOverflowConfig {
 	apply: (availableWidth: number, availableHeight: number) => void;
 }
 
-export interface SizeMiddlewareData {}
-
 /**
  * Provides data that allows you to change the size of the floating element —
  * for instance, prevent it from overflowing the clipping boundary or match the
  * width of the reference element.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/size}
  */
-export function size(input: Derivable<SizeMiddlewareInput>): Middleware<SizeMiddlewareData>;
+export function size(input: DerivableInput<SizeMiddlewareInput>): Middleware;
 
 export interface HideMiddlewareInput extends DetectOverflowConfig {
 	/**
@@ -230,8 +240,10 @@ export interface HideMiddlewareData {
 /**
  * Provides data to hide the floating element in applicable situations, such as
  * when it is not in the same clipping context as the reference element.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/hide}
  */
-export function hide(input: Derivable<HideMiddlewareInput>): Middleware<HideMiddlewareData>;
+export function hide(input: DerivableInput<HideMiddlewareInput>): Middleware<HideMiddlewareData>;
 
 export interface ArrowMiddlewareInput {
 	/**
@@ -253,8 +265,10 @@ export interface ArrowMiddlewareData extends Partial<Position> {
 /**
  * Provides data to position an inner element of the floating element so that it
  * appears centered to the reference element.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/arrow}
  */
-export function arrow(input: Derivable<ArrowMiddlewareInput>): Middleware<ArrowMiddlewareData>;
+export function arrow(input: DerivableInput<ArrowMiddlewareInput>): Middleware<ArrowMiddlewareData>;
 
 export interface InlineMiddlewareInput {
 	/**
@@ -274,5 +288,7 @@ export interface InlineMiddlewareInput {
 /**
  * Provides improved positioning for inline reference elements that can span
  * over multiple lines, such as range selections.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/middleware/inline}
  */
-export function inline(input: Derivable<InlineMiddlewareInput>): Middleware;
+export function inline(input: DerivableInput<InlineMiddlewareInput>): Middleware;

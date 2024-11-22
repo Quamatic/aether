@@ -5,7 +5,6 @@ import {
 	HideMiddlewareData,
 	OffsetMiddlewareData,
 	ShiftMiddlewareData,
-	SizeMiddlewareData,
 } from "./middleware";
 
 export type Side = "top" | "bottom" | "left" | "right";
@@ -38,7 +37,7 @@ export interface ElementRects {
 	floating: Rect;
 }
 
-export interface Elements {
+export interface ElementRefs {
 	reference: ReferenceElement;
 	target: GuiObject;
 }
@@ -66,7 +65,6 @@ export interface MiddlewareData {
 	flip?: FlipMiddlewareData;
 	autoPlacement?: AutoPlacementMiddlewareData;
 	shift?: ShiftMiddlewareData;
-	size?: SizeMiddlewareData;
 	hide?: HideMiddlewareData;
 	arrow?: ArrowMiddlewareData;
 }
@@ -75,7 +73,7 @@ export interface MiddlewareState extends Position {
 	initialPlacement: Placement;
 	placement: Placement;
 	data: MiddlewareData;
-	elements: Elements;
+	elements: ElementRefs;
 	rects: ElementRects;
 	rtl: boolean;
 	cache: Cache;
@@ -85,9 +83,12 @@ export interface MiddlewareState extends Position {
 
 export type ContainingElement = GuiObject | LayerCollector;
 
+export type Boundary = "clipping-ancestors" | GuiObject | GuiObject[] | Rect;
+export type RootBoundary = "layer-collector" | Rect;
+
 export interface Cache {
 	elements: Map<ContainingElement, ContainingElement[]>;
 	scales: Map<ContainingElement, number>;
 }
 
-export type Derivable<T> = T | (() => T);
+export type DerivableInput<T> = T | (() => T);

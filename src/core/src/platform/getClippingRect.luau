@@ -63,7 +63,12 @@ local function getClippingElementAncestors(element: GuiObject, cache: types.Cach
 	return ancestors
 end
 
--- Returns the maximum area for a floating element to be visible.
+--[[
+	Returns the maximum area that the element is visible in due to any number of "clippable" ancestors.
+
+	A clippable ancestor is any element ancestor that has `ClipsDescendants` enabled. Instances such as
+	`ScrollingFrame`s will always be considered, but you can also make your own clippable boundaries of course.
+]]
 local function getClippingRect(
 	element: GuiObject,
 	boundary: types.Boundary,

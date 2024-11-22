@@ -38,8 +38,10 @@ end
 --[[
 	Provides data to position an inner element of the floating element so that it
 	appears centered to the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/arrow
 ]]
-local function arrow(input: types.Derivable<Input>?): types.Middleware<Output>
+local function arrow(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "arrow",
 		run = function(state)

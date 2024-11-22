@@ -9,8 +9,7 @@ local platform = require(script.Parent.platform)
 local getOffsetParent = platform.getOffsetParent
 local getClippingRect = platform.getClippingRect
 local getLayerElement = platform.getLayerElement
-local convertOffsetParentRelativeRectToViewportRelativeRect =
-	platform.convertOffsetParentRelativeRectToViewportRelativeRect
+local convertOffsetParentRectToRelativeRect = platform.convertOffsetParentRectToRelativeRect
 local getScale = platform.getScale
 local isElement = platform.isElement
 
@@ -74,9 +73,7 @@ local function detectOverflow(state: types.MiddlewareState, config: DetectOverfl
 	local offsetScale = if offsetParent then getScale(offsetParent, cache) else 1
 
 	local elementRect = convertRectToBoundingRect(
-		if offsetParent
-			then convertOffsetParentRelativeRectToViewportRelativeRect(targetRect, offsetParent, cache)
-			else targetRect
+		if offsetParent then convertOffsetParentRectToRelativeRect(targetRect, offsetParent, cache) else targetRect
 	)
 
 	-- And finally, return the side values.

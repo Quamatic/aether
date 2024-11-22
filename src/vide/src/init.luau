@@ -21,7 +21,7 @@ export type MiddlewareData = Aether.MiddlewareData
 export type MiddlewareState = Aether.MiddlewareState
 export type MiddlewareResult<T> = Aether.MiddlewareResult<T>
 export type Middleware<T> = Aether.Middleware<T>
-export type Derivable<T> = Aether.Derivable<T>
+export type DerivableInput<T> = Aether.DerivableInput<T>
 
 -- process
 export type ProcessConfig = Aether.ProcessConfig

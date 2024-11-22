@@ -144,6 +144,6 @@ export type Cache = {
 	scales: { [ContainingElement]: number },
 }
 
-export type Derivable<T> = T | ((state: MiddlewareState) -> T)
+export type DerivableInput<T> = T | ((state: MiddlewareState) -> T)
 
 return nil

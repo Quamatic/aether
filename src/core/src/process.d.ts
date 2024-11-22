@@ -14,6 +14,8 @@ export interface ProcessConfigResult extends Position {
 /**
  * Computes the coordinates that will determined the placement of the target
  * element next to a given reference element.
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/guides/processing}
  */
 declare function process(reference: ReferenceElement, target: GuiObject, config: ProcessConfig): ProcessConfigResult;
 

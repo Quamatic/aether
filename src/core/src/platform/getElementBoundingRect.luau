@@ -18,10 +18,13 @@ local function createBoundingRectFromElement(element: types.ContainingElement): 
 	}
 end
 
+--[[
+	Returns the bounding rect of the given element.
+]]
 local function getElementBoundingRect(
-	element: types.ReferenceElement | LayerCollector,
-	includeScale: boolean?,
-	offsetParent: types.ContainingElement?,
+	element: types.ContainingElement | types.VirtualElement,
+	includeScale: boolean,
+	offsetParent: types.ContainingElement | nil,
 	cache: types.Cache
 ): types.BoundingRect
 	local rect: types.BoundingRect

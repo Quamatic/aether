@@ -35,8 +35,10 @@ export type Output = types.Position & {
 
 --[[
     Modifies the placement by translating the floating element along the specified axes.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/offset
 ]]
-local function offset(input: types.Derivable<Input>?): types.Middleware<Output>
+local function offset(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "offset",
 		run = function(state)

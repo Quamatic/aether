@@ -35,6 +35,12 @@ export interface UseFloatingReturn<R extends ReferenceElement, T extends GuiObje
 	};
 }
 
+/**
+ * Computes the `x` and `y` coordinates that will place the floating element next to a reference element.
+ *
+ * @param config The floating config.
+ * @see {@link https://quamatic.github.io/aether/docs/react}
+ */
 declare function useFloating<R extends ReferenceElement, T extends GuiObject = GuiObject>(
 	config: UseFloatingConfig<R, T>,
 ): UseFloatingReturn<R, T>;

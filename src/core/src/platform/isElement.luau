@@ -1,3 +1,6 @@
+--[[
+	Returns `true` if the provided value is a `GuiObject` or a `LayerCollector`.
+]]
 local function isElement(x: unknown)
 	if typeof(x) ~= "Instance" then
 		return false

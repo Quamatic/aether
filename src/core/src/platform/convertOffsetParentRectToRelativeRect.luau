@@ -4,7 +4,10 @@ local getLayerElement = require(script.Parent.getLayerElement)
 local getElementBoundingRect = require(script.Parent.getElementBoundingRect)
 local getScale = require(script.Parent.getScale)
 
-local function convertOffsetParentRelativeRectToViewportRelativeRect(
+--[[
+	Converts the given rect into a rect that is relative to that of the given offset parent.
+]]
+local function convertOffsetParentRectToRelativeRect(
 	rect: types.Rect,
 	offsetParent: types.ContainingElement,
 	cache: types.Cache
@@ -14,20 +17,20 @@ local function convertOffsetParentRelativeRectToViewportRelativeRect(
 		return rect
 	end
 
-	local scroll = Vector2.zero
+	local scrollOffset = Vector2.zero
 	if offsetParent:IsA("ScrollingFrame") then
-		scroll = offsetParent.CanvasPosition
+		scrollOffset = offsetParent.CanvasPosition
 	end
 
 	local offsetRect = getElementBoundingRect(offsetParent, false, nil, cache)
 	local scale = getScale(offsetParent, cache)
 
 	return {
-		x = rect.x * scale - scroll.X * scale + offsetRect.x,
-		y = rect.y * scale - scroll.Y * scale + offsetRect.y,
+		x = rect.x * scale - scrollOffset.X * scale + offsetRect.x,
+		y = rect.y * scale - scrollOffset.Y * scale + offsetRect.y,
 		width = rect.width * scale,
 		height = rect.height * scale,
 	}
 end
 
-return convertOffsetParentRelativeRectToViewportRelativeRect
+return convertOffsetParentRectToRelativeRect

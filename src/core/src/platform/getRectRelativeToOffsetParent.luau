@@ -4,7 +4,7 @@ local getElementBoundingRect = require(script.Parent.getElementBoundingRect)
 
 local function getRectRelativeToOffsetParent(
 	element: types.ReferenceElement,
-	offsetParent: types.ContainingElement?,
+	offsetParent: types.ContainingElement | nil,
 	cache: types.Cache
 ): types.Rect
 	local elementRect = getElementBoundingRect(element, true, offsetParent, cache)

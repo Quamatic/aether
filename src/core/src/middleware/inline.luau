@@ -119,8 +119,10 @@ end
 --[[
 	Provides improved positioning for inline reference elements that can span
 	over multiple lines, such as range selections.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/inline
 ]]
-local function inline(input: types.Derivable<Input>?): types.Middleware<Output>
+local function inline(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "inline",
 		run = function(state)

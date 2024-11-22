@@ -1,7 +1,4 @@
-import { ElementContext, MiddlewareState, Padding, Rect, SideObject } from "./types";
-
-export type Boundary = "clipping-ancestors" | GuiObject | Rect;
-export type RootBoundary = "layer-collector" | "viewport" | Rect;
+import { Boundary, ElementContext, MiddlewareState, Padding, Rect, RootBoundary, SideObject } from "./types";
 
 export interface DetectOverflowConfig {
 	boundary?: Boundary;
@@ -18,6 +15,8 @@ export interface DetectOverflowConfig {
  * - positive = overflowing the boundary by that number of pixels
  * - negative = how many pixels left before it will overflow
  * - 0 = lies flush with the boundary
+ *
+ * @see {@link https://quamatic.github.io/aether/docs/guides/collisions}
  */
 declare function detectOverflow(state: MiddlewareState, config: DetectOverflowConfig): SideObject;
 

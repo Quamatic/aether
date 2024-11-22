@@ -5,9 +5,7 @@ return {
 	getLayerElement = require(script.getLayerElement),
 	getRectRelativeToOffsetParent = require(script.getRectRelativeToOffsetParent),
 	getElementBoundingRect = require(script.getElementBoundingRect),
-	convertOffsetParentRelativeRectToViewportRelativeRect = require(
-		script.convertOffsetParentRelativeRectToViewportRelativeRect
-	),
+	convertOffsetParentRectToRelativeRect = require(script.convertOffsetParentRectToRelativeRect),
 	getScale = require(script.getScale),
 	isElement = require(script.isElement),
 	unwrapElement = require(script.unwrapElement),

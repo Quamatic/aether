@@ -26,8 +26,10 @@ export type Output = {}
 	Provides data that allows you to change the size of the floating element —
 	for instance, prevent it from overflowing the clipping boundary or match the
 	width of the reference element.
+
+	More information: https://quamatic.github.io/aether/docs/middleware/size
 ]]
-local function size(input: types.Derivable<Input>?): types.Middleware<Output>
+local function size(input: types.DerivableInput<Input>?): types.Middleware<Output>
 	return {
 		name = "size",
 		run = function(state)
@@ -84,7 +86,7 @@ local function size(input: types.Derivable<Input>?): types.Middleware<Output>
 
 			apply(availableWidth, availableHeight)
 
-			return {}
+			return nil
 		end,
 	}
 end

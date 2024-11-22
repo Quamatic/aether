@@ -17,7 +17,7 @@ local function insert<T>(dependencies: DependencyList, input: T)
 end
 
 local function offset(
-	input: Aether.Derivable<Aether.OffsetMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.OffsetMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.offset(input)
@@ -33,7 +33,7 @@ local function offset(
 end
 
 local function flip(
-	input: Aether.Derivable<Aether.FlipMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.FlipMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.flip(input)
@@ -49,7 +49,7 @@ local function flip(
 end
 
 local function autoPlacement(
-	input: Aether.Derivable<Aether.AutoPlacementMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.AutoPlacementMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.autoPlacement(input)
@@ -65,7 +65,7 @@ local function autoPlacement(
 end
 
 local function shift(
-	input: Aether.Derivable<Aether.ShiftMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.ShiftMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.shift(input)
@@ -81,7 +81,7 @@ local function shift(
 end
 
 local function size(
-	input: Aether.Derivable<Aether.SizeMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.SizeMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.size(input)
@@ -97,7 +97,7 @@ local function size(
 end
 
 local function hide(
-	input: Aether.Derivable<Aether.HideMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.HideMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.hide(input)
@@ -113,7 +113,7 @@ local function hide(
 end
 
 local function arrow(
-	input: Aether.Derivable<Aether.ArrowMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.ArrowMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.arrow(input)
@@ -129,7 +129,7 @@ local function arrow(
 end
 
 local function inline(
-	input: Aether.Derivable<Aether.InlineMiddlewareInput>?,
+	input: Aether.DerivableInput<Aether.InlineMiddlewareInput>?,
 	dependencies: DependencyList?
 ): ReactiveMiddleware
 	local base = Aether.inline(input)
