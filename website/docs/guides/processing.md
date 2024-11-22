@@ -235,3 +235,9 @@ The data returned by any middleware used.
 
 The `reference` element can be input as a [virtual element](./virtual-elements). This can be used when you need something like a custom reference area,
 or more control over your boundary.
+
+## Cache
+
+A cache is used during processing processing for storing element boundaries and scales. This is so processing speed is increased, such as during multiple lifecycle resets.
+
+The cache only lives for a single `process()` call.

@@ -277,6 +277,10 @@ When set to `true`, the ancestor `UIScale`'s will be accounted for in the calcul
 
 The element to calculate relative to. When `includeScale` is set to `true`, the ancestor `UIScale`'s of this element will be considered instead of the given `element`. Note that `offsetParent` is typically just the `Parent` property of the element, and it also doesn't have to necessarily be accessed off of `element` itself.
 
+### `cache`
+
+The [lifecycle cache](./guides/processing#cache)
+
 ## `getElementRects`
 
 Takes in the `elements` and returns the element [`Rect`](./types#rect) objects.
@@ -290,6 +294,10 @@ The `x` and `y` values of a `reference` `Rect` should be its coordinates relativ
 ### `target`
 
 Both `x` and `y` are not relevant initially, so you can set these both of these to `0`.
+
+### `cache`
+
+The [lifecycle cache](./guides/processing#cache)
 
 ## `getClippingRect`
 
@@ -308,6 +316,58 @@ The [boundary](./guides/collisions.md#boundary) to use.
 ### `rootBoundary`
 
 The [root boundary](./guides/collisions#rootboundary) to use.
+
+### `cache`
+
+The [lifecycle cache](./guides/processing#cache)
+
+## `getScale`
+
+Returns the scale of the given element.
+
+The scale of an element is the factor of each ancestor `UIScale` that affects it.
+
+### `element`
+
+The element to check
+
+### `cache`
+
+The [lifecycle cache](./guides/processing#cache)
+
+## `getOffsetParent`
+
+Returns the "offset" parent of the given element.
+
+The "offset" parent is the first valid parent of the given element. Most of the time,this is just the `Parent` value, but there are cases where a `Folder` instance may be used. Because of that, this is useful for being safe.
+
+### `element`
+
+The element to get the parent from.
+
+## `getLayerElement`
+
+Returns the contaning `LayerCollector` instance of the given element, if one exists.
+
+### `element`
+
+The element to retrieve from.
+
+## `convertOffsetParentRectToRelativeRect`
+
+Converts the given rect into a rect that is relative to that of the given offset parent.
+
+### `rect`
+
+The rect to go off of.
+
+### `offsetParent`
+
+The offset parent element.
+
+### `cache`
+
+The [lifecycle cache](./guides/processing#cache)
 
 ## `isElement`
 

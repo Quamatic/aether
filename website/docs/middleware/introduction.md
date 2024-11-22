@@ -137,6 +137,7 @@ The properties passed are below:
         elements: ElementRefs,
         rects: ElementRects,
         rtl: boolean,
+        cache: Cache,
     }
     ```
 
@@ -154,6 +155,7 @@ The properties passed are below:
         elements: ElementRefs;
         rects: ElementRects;
         rtl: boolean;
+        cache: Cache;
     }
     ```
 
@@ -191,6 +193,10 @@ This is an object containing the `Rect`s of the reference and floating elements,
 ### `rtl`
 
 The right-to-left boolean flag passed in to `process()`.
+
+### `cache`
+
+The cache used for storing elements and scales during the lifecycle.
 
 ## Ordering
 

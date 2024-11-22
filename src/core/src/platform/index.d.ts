@@ -82,7 +82,7 @@ export function getLayerElement(element: ContainingElement): LayerCollector | un
 /**
  * Converts the given rect into a rect that is relative to that of the given offset parent.
  *
- * @param rect The relative rect.
+ * @param rect The rect to go off of.
  * @param offsetParent The offset parent element.
  * @param cache The lifecyle cache.
  */

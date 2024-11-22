@@ -98,7 +98,7 @@ This is the input you can pass to `useFloating()`:
     ```luau
     type UseFloatingConfig = {
         placement: Placement?,
-        middleware: { Middleware }?,
+        middleware: { ReactiveMiddleware }?,
         elements: {
             reference: ReferenceElement?,
             target: GuiObject?,
@@ -114,7 +114,7 @@ This is the input you can pass to `useFloating()`:
     ```typescript
     interface UseFloatingConfig {
         placement?: Placement;
-        middleware?: Middleware[];
+        middleware?: ReactiveMiddleware[];
         elements?: {
             reference?: ReferenceElement;
             target?: GuiObject;
@@ -383,3 +383,67 @@ The reference element. May be virtual.
 #### `target`
 
 The floating (target) element.
+
+## Reactive middleware
+
+When using stateful values inside _functions_ aren't fresh or reacftive.
+
+<Tabs groupId="package-manager">
+  <TabItem value="wally" label="luau" default>
+
+    ```luau
+    local AetherReact = require(path.to.aether-react)
+
+    local value, setValue = React.useState(0)
+
+    AetherReact.offset(value) -- reactive and fresh
+    AetherReact.offset(function()
+        return value
+    end) -- NOT reactive or fresh
+    ```
+
+  </TabItem>
+
+  <TabItem value="roblox-ts" label="roblox-ts">
+
+    ```typescript
+    import { offset } from "@rbxts/aether-react";
+
+    const [value, setValue] = useState(0);
+
+    offset(value) // reactive and fresh
+    offset(() => value) // NOT reactive or fresh
+    ```
+
+  </TabItem>
+</Tabs>
+
+Specifying the dependencies as a second argument of any middleware function will keep it reactive:
+
+<Tabs groupId="package-manager">
+  <TabItem value="wally" label="luau" default>
+
+    ```luau
+    local AetherReact = require(path.to.aether-react)
+
+    local value, setValue = React.useState(0)
+
+    AetherReact.offset(function()
+        return value
+    end, { value })
+    ```
+
+  </TabItem>
+
+  <TabItem value="roblox-ts" label="roblox-ts">
+
+    ```typescript
+    import { offset } from "@rbxts/aether-react";
+
+    const [value, setValue] = useState(0);
+
+    offset(() => value, [value])
+    ```
+
+  </TabItem>
+</Tabs>
