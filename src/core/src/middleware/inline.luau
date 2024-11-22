@@ -1,4 +1,7 @@
 local types = require(script.Parent.Parent.types)
+type Side = types.Side
+type Rect = types.Rect
+type BoundingRect = types.BoundingRect
 
 local rects = require(script.Parent.Parent.utils.rects)
 local convertRectToBoundingRect = rects.convertRectToBoundingRect
@@ -31,11 +34,11 @@ export type Input = {
 
 export type Output = {}
 
-local function sortRectsByHeight(a: types.BoundingRect, b: types.BoundingRect)
+local function sortRectsByHeight(a: BoundingRect, b: BoundingRect)
 	return a.y < b.y
 end
 
-local function max(rects: { types.BoundingRect }, side: types.Side)
+local function max(rects: { BoundingRect }, side: Side)
 	local highest = 0
 
 	for _, rect in rects do
@@ -47,7 +50,7 @@ local function max(rects: { types.BoundingRect }, side: types.Side)
 	return highest
 end
 
-local function min(rects: { types.BoundingRect }, side: types.Side)
+local function min(rects: { types.BoundingRect }, side: Side)
 	local lowest = math.huge
 
 	for _, rect in rects do
@@ -59,7 +62,7 @@ local function min(rects: { types.BoundingRect }, side: types.Side)
 	return lowest
 end
 
-local function getRectFromBoundingRects(rects: { types.BoundingRect }): types.Rect
+local function getRectFromBoundingRects(rects: { BoundingRect }): Rect
 	local minX = min(rects, "left")
 	local minY = min(rects, "top")
 	local maxX = max(rects, "right")
@@ -73,13 +76,13 @@ local function getRectFromBoundingRects(rects: { types.BoundingRect }): types.Re
 	}
 end
 
-local function getRectsByLine(rects: { types.BoundingRect })
+local function getRectsByLine(rects: { BoundingRect })
 	local sortedRects = table.clone(rects)
 	table.sort(sortedRects, sortRectsByHeight)
 
 	local groups = {}
 	local length = 0
-	local currentGroup: { types.BoundingRect }
+	local currentGroup: { BoundingRect }
 
 	for index, rect in sortedRects do
 		local previousRect = sortedRects[index - 1]
@@ -100,14 +103,14 @@ local function getRectsByLine(rects: { types.BoundingRect })
 	return mapped
 end
 
-local function isPointFullyInside(x: number, y: number, rect: types.BoundingRect, padding: types.SideObject)
+local function isPointFullyInside(x: number, y: number, rect: BoundingRect, padding: types.SideObject)
 	return x > rect.left - padding.left
 		and x < rect.right + padding.right
 		and y > rect.top - padding.top
 		and y < rect.bottom + padding.bottom
 end
 
-local function getNativeRects(reference: types.ReferenceElement): { types.BoundingRect }
+local function getNativeRects(reference: types.ReferenceElement): { BoundingRect }
 	if isElement(reference) then
 		return {}
 	end

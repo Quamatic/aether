@@ -26,12 +26,12 @@ export type Input = {
 }
 
 export type Output = {
-	[types.Axis]: number,
+	[Axis]: number,
 	centerOffset: number,
 	alignmentOffset: number?,
 }
 
-local function getElementAxisLength(element: GuiObject, length: types.Length)
+local function getElementAxisLength(element: GuiObject, length: Length)
 	return if length == "width" then element.AbsoluteSize.X else element.AbsoluteSize.Y
 end
 
@@ -111,7 +111,7 @@ local function arrow(input: types.DerivableInput<Input>?): types.Middleware<Outp
 			return {
 				[axis] = axisValue + alignmentOffset,
 				data = {
-					[axis :: Axis] = offset,
+					[axis] = offset,
 					centerOffset = center - offset - alignmentOffset,
 					alignmentOffset = if shouldAddOffset then alignmentOffset else nil,
 				},

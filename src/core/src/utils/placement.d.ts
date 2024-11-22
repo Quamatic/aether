@@ -10,7 +10,7 @@ import { Alignment, Axis, ElementRects, Placement, Side } from "../types";
 export function getPlacementPosition(placement: Placement): LuaTuple<[Side, Alignment | undefined]>;
 
 /**
- * Returns the {@link Axis | axis} equivalents of the side and alignment of the given placement.
+ * Returns the {@link Axis | axis} equivalents of the side and alignment for the given placement.
  *
  * @param placement The placement to extract from.
  */
