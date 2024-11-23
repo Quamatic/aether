@@ -59,14 +59,3 @@ The target element to check for updating.
 ### `update`
 
 A callback function that executes when an update is triggered.
-
-### `event`
-
-Default value: "elements"
-
-Specifies the type of event that triggers updates, with two options:
-
-There are two possible options:
-
--   `"elements"`: Triggers updates when the **size** of the `target` or the **size** and **position** of the `reference` change.
--   `"render"`: Performs per-frame equality checks on the `reference` element using RunService.PreRender (or RunService.RenderStepped) and updates only when changes are detected
