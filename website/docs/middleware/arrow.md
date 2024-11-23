@@ -11,6 +11,10 @@ Provides positioning data for an arrow element (triangle or caret) inside the fl
 
 This is useful to add an additional visual cue to the floating element about which element it is referring to.
 
+<div class="text--center">
+    ![image](/examples/arrow.gif)
+</div>
+
 ## Example
 
 The layout box of the arrow element should be a square with equal width and height. Inner or pseudo-elements may have a different aspect ratio.

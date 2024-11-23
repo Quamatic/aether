@@ -11,6 +11,12 @@ A data provider that allows you to hide the floating element in applicable situa
 
 This is useful for situations where you want to hide the floating element because it appears detached from the reference element (or attached to nothing).
 
+<div class="text--center">
+    ![image](/examples/hide.gif)
+</div>
+
+In the above example, the floating element turns partially transparent once it has `escaped` the reference element’s clipping context. Once the reference element is hidden, it hides itself.
+
 ## Example
 
 <Tabs groupId="package-manager">

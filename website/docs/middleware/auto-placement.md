@@ -11,6 +11,10 @@ Chooses the placement that has the most space available automatically.
 
 This is useful when you don’t know which placement will be best for the floating element, or don’t want to have to explicitly specify it.
 
+<div class="text--center">
+    ![image](/examples/auto-placement.gif)
+</div>
+
 ## Example
 
 :::note

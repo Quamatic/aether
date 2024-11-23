@@ -11,6 +11,10 @@ Translates the floating element along the specified axes.
 
 This lets you add distance (margin or spacing) between the reference and floating element, slightly alter the placement, or even create [custom placements](#creating-custom-placements)
 
+<div class="text--center">
+    ![image](/examples/offset.png)
+</div>
+
 ## Example
 
 <Tabs groupId="package-manager">

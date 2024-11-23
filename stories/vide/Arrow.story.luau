@@ -127,6 +127,8 @@ return {
 					create "TextLabel" {
 						Name = "Text",
 
+						Position = UDim2.fromOffset(0, 16),
+
 						AutomaticSize = Enum.AutomaticSize.XY,
 						Text = "The arrow is positioned dynamically",
 						TextSize = 16,

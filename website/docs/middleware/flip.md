@@ -11,6 +11,10 @@ Changes the placement of the floating element to keep it in view.
 
 This prevents the floating element from overflowing along its side axis by flipping it to the opposite side by default.
 
+<div class="text--center">
+    ![image](/examples/flip.gif)
+</div>
+
 ## Example
 
 <Tabs groupId="package-manager">
@@ -101,7 +105,7 @@ Whether to allow fallback to the opposite axis if no placements along the prefer
 In RTL writing direction, the x-axis directions are reversed.
 :::
 
-### `flipAligment`
+### `flipAlignment`
 
 Default value: `true`
 

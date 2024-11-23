@@ -11,6 +11,10 @@ Shifts the floating element to keep it in view.
 
 This prevents the floating element from overflowing along its axis of alignment, thereby preserving the side it’s placed on.
 
+<div class="text--center">
+    ![image](/examples/shift.gif)
+</div>
+
 ## Example
 
 <Tabs groupId="package-manager">

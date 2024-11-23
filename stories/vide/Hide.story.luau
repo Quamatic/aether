@@ -37,7 +37,7 @@ return {
 			children = {
 				create "ScrollingFrame" {
 					Size = UDim2.fromScale(1, 1),
-					CanvasSize = UDim2.fromOffset(0, 812),
+					CanvasSize = UDim2.fromOffset(0, 1024),
 					BackgroundTransparency = 1,
 
 					create "TextLabel" {
