@@ -15,8 +15,6 @@ This is useful when you don’t know which placement will be best for the floati
     ![image](/examples/auto-placement.gif)
 </div>
 
-## Example
-
 :::note
 This is an alternative to `flip()`, so only one of either can be used. See [how they differ here](#conflict-with-flip).
 :::
