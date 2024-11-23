@@ -16,6 +16,7 @@ type Source<T> = (() -> T) & ((value: T) -> T)
 export type UseFloatingConfig = {
 	placement: Derivable<Aether.Placement>?,
 	middleware: Derivable<{ Aether.Middleware }>?,
+	rtl: Derivable<boolean>?,
 	whileElementsMounted: (reference: Aether.ReferenceElement, target: GuiObject, update: () -> ()) -> () -> ()?,
 }
 
@@ -39,6 +40,7 @@ local function useFloating(
 ): UseFloatingReturn
 	local targetPlacement = config.placement or "bottom"
 	local middleware = config.middleware or {}
+	local rtl = if config.rtl ~= nil then config.rtl else false
 
 	local x = source(0)
 	local y = source(0)
@@ -64,6 +66,7 @@ local function useFloating(
 		local result = Aether.process(currentReference, currentTarget, {
 			placement = read(targetPlacement),
 			middleware = read(middleware),
+			rtl = read(rtl),
 		})
 
 		if capturedVersion == version() then
