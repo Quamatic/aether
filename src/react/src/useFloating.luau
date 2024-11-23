@@ -174,7 +174,7 @@ local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 			elements = elements,
 			refs = refs,
 		})
-	end, { data, update, elements } :: { any })
+	end, { data, update, refs, elements } :: { any })
 end
 
 return useFloating
