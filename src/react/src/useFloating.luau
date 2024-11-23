@@ -48,6 +48,7 @@ export type UseFloatingReturn = UseFloatingData & {
 local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 	local placement: Aether.Placement = config.placement or "bottom"
 	local middleware = config.middleware or {}
+	local rtl = if config.rtl ~= nil then config.rtl else false
 	local sourceElements = config.elements or {} :: Aether.ElementRefs
 	local whileElementsMounted = config.whileElementsMounted
 
@@ -102,7 +103,8 @@ local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 
 		local result = Aether.process(referenceRef.current, targetRef.current, {
 			placement = placement,
-			middleware = middleware,
+			middleware = latestMiddleware,
+			rtl = rtl,
 		})
 
 		local fullData = merge(result, {
@@ -112,7 +114,7 @@ local function useFloating(config: UseFloatingConfig): UseFloatingReturn
 		if isMountedRef.current then
 			setData(fullData)
 		end
-	end, { latestMiddleware, placement } :: { any })
+	end, { latestMiddleware, placement, rtl } :: { any })
 
 	-- Mount ref
 	useLayoutEffect(function()
